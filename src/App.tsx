@@ -19,7 +19,7 @@ class App extends React.Component<{}, State> {
   state: State = initialState();
 
   render() {
-    const { code, cursor } = this.state;
+    const { cursor } = this.state;
 
     let keyboard;
     if (cursor.token === 0) {
@@ -39,7 +39,7 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <CodeView code={this.state.code} />
+        <CodeView code={this.state.code} currentLine={this.state.cursor.line} />
         {keyboard}
       </div>
     );

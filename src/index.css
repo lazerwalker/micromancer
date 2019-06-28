@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .keyboard {
   bottom: 0;
   flex-direction: row;
@@ -36,4 +31,39 @@ pre {
 
 button {
   touch-action: manipulation;
+}
+
+.code-box {
+  border: 1px solid #ddd;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  margin: 30px;
+  text-align: left;
+}
+
+.code-line {
+  line-height: 1.5em;
+}
+
+.line-num {
+  background-color: #eee;
+  display: inline-block;
+  padding-left: 10px;
+  text-align: center;
+}
+.line-num.relative {
+  color: #bbb;
+  text-align: right;
+  width: 20px;
+}
+
+.line-num.absolute {
+  border-right: 1px solid #ccc;
+  padding-right: 15px;
+  width: 20px;
+}
+
+.code-instruction {
+  text-align: left;
+  padding-left: 15px;
 }

@@ -7,7 +7,7 @@ export interface State {
 
 export const initialState = (props?: Partial<State>): State => {
   return {
-    code: [],
+    code: [[]],
     cursor: { line: 0, token: 0, inProgress: false },
     ...props
   };

@@ -72,6 +72,11 @@ export function dispatch(state: State, action: Action): State {
         cursor.inProgress = false;
         cursor.token = 0;
         cursor.line = cursor.line + 1;
+
+        if (!code[cursor.line]) {
+          code.push([]);
+        }
+
         return newState;
       }
     }
