@@ -17,7 +17,7 @@ export const initialState = (props?: Partial<State>): State => {
   };
 };
 
-interface CursorPosition {
+export interface CursorPosition {
   line: number;
   token: number;
   inProgress: boolean;

@@ -25,8 +25,8 @@ describe("dispatch", () => {
   describe("typeOpcode", () => {
     describe("when the line doesn't exist", () => {
       beforeEach(() => {
-        state = initialState();
-        result = dispatch(state, typeOpcodeAction(Opcode.JMP));
+        state = initialState({ code: [] });
+        result = dispatch(state, typeOpcodeAction("JMP"));
       });
 
       it("adds the opcode", () => {
@@ -41,7 +41,7 @@ describe("dispatch", () => {
     describe("when the line exists but has no opcode", () => {
       beforeEach(() => {
         state = initialState({ code: [[]] });
-        result = dispatch(state, typeOpcodeAction(Opcode.JMP));
+        result = dispatch(state, typeOpcodeAction("JMP"));
       });
 
       it("adds the opcode", () => {
@@ -56,7 +56,7 @@ describe("dispatch", () => {
     describe("when the line already has an opcode", () => {
       beforeEach(() => {
         state = stateFactory("DAT 0 1", [0, 0]);
-        result = dispatch(state, typeOpcodeAction(Opcode.JMP));
+        result = dispatch(state, typeOpcodeAction("JMP"));
       });
 
       it("overwrites the existing opcode", () => {
@@ -186,7 +186,6 @@ describe("dispatch", () => {
         });
 
         it("moves on to the next line", () => {
-          expect(result.code).toEqual(state.code);
           expect(result.cursor).toEqual({
             line: 1,
             token: 0,

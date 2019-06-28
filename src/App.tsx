@@ -8,7 +8,8 @@ import {
   Action,
   typeOperandDigitAction,
   typeOperandModeAction,
-  nextWordAction
+  nextWordAction,
+  typeOpcodeAction
 } from "./Action";
 import { State, initialState } from "./State";
 import CodeView from "./components/CodeView";
@@ -39,23 +40,28 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <CodeView code={this.state.code} currentLine={this.state.cursor.line} />
+        <CodeView
+          code={this.state.code}
+          currentLine={this.state.cursor.line}
+          onLineClick={this.clickLine}
+          onTokenClick={this.clickToken}
+        />
         {keyboard}
       </div>
     );
   }
 
+  clickLine = (line: number) => {};
+
+  clickToken = (line: number, token: number) => {};
+
   typeOpcode = (k: string) => {
-    const action: Action = {
-      type: ActionType.TypeOpcode,
-      value: k
-    };
-    const newState = dispatch(this.state, action);
+    const newState = dispatch(this.state, typeOpcodeAction(k));
     this.setState(newState);
   };
 
   typeDigitOrMode = (d: string) => {
-    let action: Action;
+    let action: Action<any>;
     if (parseInt(d, 10).toString() === d) {
       action = typeOperandDigitAction(parseInt(d));
     } else {
