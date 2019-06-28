@@ -1,0 +1,10 @@
+* Style keyboard
+* Enter labels
+* Can tap a token to select it
+* Can tap a label to insert it if in an operand
+* Syntax highlighting
+* Backspace
+* Negative numbers
+* Math
+* Animate keyboard
+* Long-press an opcode to get a description
