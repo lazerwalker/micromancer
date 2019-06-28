@@ -5,6 +5,7 @@ import classNames from "classnames";
 interface Props {
   code: Line[];
   currentLine: number;
+  currentToken: number;
   onLineClick: (line: number) => void;
   onTokenClick: (line: number, token: number) => void;
 }
@@ -16,17 +17,19 @@ export default function(props: Props) {
         opcode: ti === 0,
         "operand-1": ti === 1,
         "operand-2": ti === 2,
+        selected: i === props.currentLine && ti === props.currentToken,
         operand: ti !== 0
       });
       return (
         <span
           className={tokenClasses}
           key={`token-${i}-${ti}`}
-          onClick={() => {
+          onClick={(e: any) => {
             props.onTokenClick(i, ti);
+            e.stopPropagation();
           }}
         >
-          {l}
+          {t}
         </span>
       );
     });

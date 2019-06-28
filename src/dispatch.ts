@@ -2,7 +2,7 @@ import { State } from "./State";
 import { Action, ActionType } from "./Action";
 import _ from "lodash";
 
-export function dispatch(state: State, action: Action): State {
+export function dispatch(state: State, action: Action<any>): State {
   const newState = _.cloneDeep(state);
 
   const { cursor, code } = newState;
@@ -81,6 +81,9 @@ export function dispatch(state: State, action: Action): State {
       }
     }
     return state;
+  } else if (action.type === ActionType.SetCursor) {
+    newState.cursor = action.value;
+    return newState;
   }
 
   return state;

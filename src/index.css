@@ -79,3 +79,11 @@ button {
 .current-line .line-num.relative {
   color: #eee;
 }
+
+.code-instruction .token {
+  padding-right: 12px;
+}
+
+.code-instruction .token.selected {
+  background-color: #aaa;
+}

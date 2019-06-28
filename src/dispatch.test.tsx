@@ -4,7 +4,8 @@ import {
   typeOperandModeAction,
   typeOperandLabelAction,
   typeOpcodeAction,
-  nextWordAction
+  nextWordAction,
+  setCursorAction
 } from "./Action";
 import { dispatch } from "./dispatch";
 import { Opcode, AddressingMode } from "./types";
@@ -209,6 +210,14 @@ describe("dispatch", () => {
           });
         });
       });
+    });
+  });
+
+  describe("setCursor", () => {
+    it("should move the cursor", () => {
+      state = stateFactory("", [0, 0]);
+      result = dispatch(state, setCursorAction(1, 3));
+      expect(result.cursor).toEqual({ line: 1, token: 3, inProgress: false });
     });
   });
 });

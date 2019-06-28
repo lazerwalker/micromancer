@@ -9,7 +9,8 @@ import {
   typeOperandDigitAction,
   typeOperandModeAction,
   nextWordAction,
-  typeOpcodeAction
+  typeOpcodeAction,
+  setCursorAction
 } from "./Action";
 import { State, initialState } from "./State";
 import CodeView from "./components/CodeView";
@@ -43,6 +44,7 @@ class App extends React.Component<{}, State> {
         <CodeView
           code={this.state.code}
           currentLine={this.state.cursor.line}
+          currentToken={this.state.cursor.token}
           onLineClick={this.clickLine}
           onTokenClick={this.clickToken}
         />
@@ -51,9 +53,17 @@ class App extends React.Component<{}, State> {
     );
   }
 
-  clickLine = (line: number) => {};
+  clickLine = (line: number) => {
+    if (line === this.state.cursor.line) {
+      return;
+    }
+    this.setState(dispatch(this.state, setCursorAction(line, 0)));
+  };
 
-  clickToken = (line: number, token: number) => {};
+  clickToken = (line: number, token: number) => {
+    console.log("Click token");
+    this.setState(dispatch(this.state, setCursorAction(line, token)));
+  };
 
   typeOpcode = (k: string) => {
     const newState = dispatch(this.state, typeOpcodeAction(k));
@@ -61,7 +71,7 @@ class App extends React.Component<{}, State> {
   };
 
   typeDigitOrMode = (d: string) => {
-    let action: Action<any>;
+    let action: Action<string>;
     if (parseInt(d, 10).toString() === d) {
       action = typeOperandDigitAction(parseInt(d));
     } else {

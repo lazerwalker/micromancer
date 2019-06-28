@@ -1,6 +1,8 @@
 * Style keyboard
+* Style selected tokens
+* There's a faux extra token at the end of the list that's selected / you can click on
 * Enter labels
-* Can tap a token to select it
+* Show labels on the view
 * Can tap a label to insert it if in an operand
 * Syntax highlighting
 * Backspace
@@ -8,3 +10,4 @@
 * Math
 * Animate keyboard
 * Long-press an opcode to get a description
+* Style everything to look old-timey
