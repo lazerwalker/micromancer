@@ -67,3 +67,15 @@ button {
   text-align: left;
   padding-left: 15px;
 }
+
+.current-line {
+  background-color: #eee;
+}
+
+.current-line .line-num {
+  background-color: #aaa;
+}
+
+.current-line .line-num.relative {
+  color: #eee;
+}
