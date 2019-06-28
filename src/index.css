@@ -33,3 +33,7 @@ pre {
   margin-top: 30px;
   text-align: left;
 }
+
+button {
+  touch-action: manipulation;
+}

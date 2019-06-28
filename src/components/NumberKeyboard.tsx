@@ -2,7 +2,9 @@ import * as React from "react";
 
 interface Props {
   canAddAddressingMode: boolean;
+  canNext: boolean;
   onKeyPress: (number: string) => void;
+  onNext: () => void;
 }
 
 export default function(props: Props) {
@@ -35,7 +37,11 @@ export default function(props: Props) {
     <div className="keyboard number">
       <div className="numbers">{numberKeys}</div>
       <div className="addressingModes">{addressingModes}</div>
-      <button key="done" onClick={() => props.onKeyPress("")}>
+      <button
+        key="done"
+        disabled={!props.canNext}
+        onClick={() => props.onNext()}
+      >
         NEXT
       </button>
     </div>
