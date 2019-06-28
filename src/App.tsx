@@ -4,18 +4,20 @@ import OpcodeKeyboard from "./components/OpcodeKeyboard";
 import NumberKeyboard from "./components/NumberKeyboard";
 import { dispatch } from "./dispatch";
 import {
-  ActionType,
   Action,
   typeOperandDigitAction,
   typeOperandModeAction,
   nextWordAction,
   typeOpcodeAction,
-  setCursorAction
+  setCursorAction,
+  backspaceAction,
+  typeOperandLabelAction
 } from "./Action";
 import { State, initialState } from "./State";
 import CodeView from "./components/CodeView";
 import { addressingModeValue } from "./types";
 import { currentOperandIsValid } from "./currentOperandIsValid";
+import _ from "lodash";
 
 class App extends React.Component<{}, State> {
   state: State = initialState();
@@ -23,17 +25,26 @@ class App extends React.Component<{}, State> {
   render() {
     const { cursor } = this.state;
 
+    const token = this.state.code[this.state.cursor.line][
+      this.state.cursor.token
+    ];
+
     let keyboard;
     if (cursor.token === 0) {
       keyboard = (
-        <OpcodeKeyboard onKeyPress={this.typeOpcode} onComplete={this.next} />
+        <OpcodeKeyboard
+          onKeyPress={this.typeOpcode}
+          onNext={this.next}
+          onBackspace={this.didTypeBackspace}
+        />
       );
     } else {
       keyboard = (
         <NumberKeyboard
           onKeyPress={this.typeDigitOrMode}
+          onBackspace={this.didTypeBackspace}
           onNext={this.next}
-          canAddAddressingMode={!cursor.inProgress}
+          canAddAddressingMode={_.isUndefined(token) || token.length === 0}
           canNext={currentOperandIsValid(this.state)}
         />
       );
@@ -74,8 +85,10 @@ class App extends React.Component<{}, State> {
     let action: Action<string>;
     if (parseInt(d, 10).toString() === d) {
       action = typeOperandDigitAction(parseInt(d));
-    } else {
+    } else if (addressingModeValue(d)) {
       action = typeOperandModeAction(addressingModeValue(d));
+    } else {
+      action = typeOperandLabelAction(d);
     }
     // TODO: Math
 
@@ -84,6 +97,10 @@ class App extends React.Component<{}, State> {
 
   next = () => {
     this.setState(dispatch(this.state, nextWordAction()));
+  };
+
+  didTypeBackspace = () => {
+    this.setState(dispatch(this.state, backspaceAction()));
   };
 }
 

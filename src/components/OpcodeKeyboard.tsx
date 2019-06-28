@@ -5,7 +5,8 @@ import { Opcode } from "../types";
 
 interface Props {
   onKeyPress: (opcode: string) => void;
-  onComplete: () => void;
+  onBackspace: () => void;
+  onNext: () => void;
 }
 
 export default function(props: Props) {
@@ -26,8 +27,11 @@ export default function(props: Props) {
   return (
     <div className="opcode keyboard">
       {opcodes}
-      <button key="next" onClick={props.onComplete}>
+      <button key="next" onClick={props.onNext}>
         next
+      </button>
+      <button key="backspace" onClick={props.onBackspace}>
+        backspace
       </button>
     </div>
   );

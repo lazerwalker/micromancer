@@ -5,6 +5,7 @@ interface Props {
   canNext: boolean;
   onKeyPress: (number: string) => void;
   onNext: () => void;
+  onBackspace: () => void;
 }
 
 export default function(props: Props) {
@@ -33,16 +34,33 @@ export default function(props: Props) {
     );
   });
 
+  const mathKeys = ["-", "+", "*", "/"].map(k => {
+    return (
+      <button
+        key={`key-${k}`}
+        className="addressingMode"
+        disabled={k !== "-" && props.canAddAddressingMode}
+        onClick={() => props.onKeyPress(k)}
+      >
+        {k}
+      </button>
+    );
+  });
+
   return (
     <div className="keyboard number">
       <div className="numbers">{numberKeys}</div>
       <div className="addressingModes">{addressingModes}</div>
+      <div className="mathKeys">{mathKeys}</div>
       <button
         key="done"
         disabled={!props.canNext}
         onClick={() => props.onNext()}
       >
         NEXT
+      </button>
+      <button key="backspace" onClick={() => props.onBackspace()}>
+        backspace
       </button>
     </div>
   );

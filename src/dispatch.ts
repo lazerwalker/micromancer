@@ -29,7 +29,6 @@ export function dispatch(state: State, action: Action<any>): State {
     if (!line) return state;
 
     line[cursor.token] = (line[cursor.token] || "") + action.value;
-    cursor.inProgress = true;
 
     return newState;
   } else if (action.type === ActionType.TypeOperandLabel) {
@@ -37,14 +36,9 @@ export function dispatch(state: State, action: Action<any>): State {
       return state;
     }
 
-    if (cursor.inProgress) {
-      return state;
-    }
-
     if (!line) return state;
 
-    line[cursor.token] = action.value;
-    cursor.inProgress = true;
+    line[cursor.token] = (line[cursor.token] || "") + action.value;
 
     return newState;
   } else if (action.type === ActionType.TypeOperandMode) {
@@ -52,24 +46,20 @@ export function dispatch(state: State, action: Action<any>): State {
       return state;
     }
 
-    if (cursor.inProgress) {
-      return state;
-    }
-
     if (!line) return state;
 
+    const token = line[cursor.token];
+    if (token && token.length > 0) return state;
+
     line[cursor.token] = action.value;
-    cursor.inProgress = true;
 
     return newState;
   } else if (action.type === ActionType.NextWord) {
     if (line[cursor.token]) {
       if (cursor.token === 1) {
-        cursor.inProgress = false;
         cursor.token = 2;
         return newState;
       } else if (cursor.token === 2) {
-        cursor.inProgress = false;
         cursor.token = 0;
         cursor.line = cursor.line + 1;
 
@@ -84,6 +74,29 @@ export function dispatch(state: State, action: Action<any>): State {
   } else if (action.type === ActionType.SetCursor) {
     newState.cursor = action.value;
     return newState;
+  } else if (action.type === ActionType.Backspace) {
+    const token = line[cursor.token];
+    // Opcode
+    if (cursor.token === 0) {
+      if (_.isUndefined(token)) {
+        if (cursor.line >= 0) {
+          cursor.line -= 1;
+          cursor.token = 2;
+        }
+      } else {
+        line[cursor.token] = undefined;
+      }
+      return newState;
+    } else {
+      if (_.isUndefined(token)) {
+        cursor.token -= 1;
+      } else if (token.length > 1) {
+        line[cursor.token] = token.slice(0, token.length - 1);
+      } else {
+        line[cursor.token] = undefined;
+      }
+      return newState;
+    }
   }
 
   return state;

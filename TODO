@@ -5,9 +5,11 @@
 * Show labels on the view
 * Can tap a label to insert it if in an operand
 * Syntax highlighting
-* Backspace
 * Negative numbers
 * Math
 * Animate keyboard
 * Long-press an opcode to get a description
 * Style everything to look old-timey
+* Indicate invalid lines, and empty token spaces
+* Empty token spots have a min-width
+* When highlighting an indirect operand, subtly highlight the thing it refers to

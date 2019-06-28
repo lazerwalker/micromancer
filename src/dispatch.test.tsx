@@ -5,14 +5,15 @@ import {
   typeOperandLabelAction,
   typeOpcodeAction,
   nextWordAction,
-  setCursorAction
+  setCursorAction,
+  backspaceAction
 } from "./Action";
 import { dispatch } from "./dispatch";
 import { Opcode, AddressingMode } from "./types";
 
 const stateFactory = (code: string, pos: number[]): State => {
-  const parsedCode = code.split("\n").map(l => l.split(" "));
-  const parsedPos = { line: pos[0], token: pos[1], inProgress: !!pos[2] };
+  const parsedCode = code.split("; ").map(l => l.split(" "));
+  const parsedPos = { line: pos[0], token: pos[1] };
   return initialState({
     code: parsedCode,
     cursor: parsedPos
@@ -35,7 +36,7 @@ describe("dispatch", () => {
       });
 
       it("increments the cursor", () => {
-        expect(result.cursor).toEqual({ line: 0, token: 1, inProgress: false });
+        expect(result.cursor).toEqual({ line: 0, token: 1 });
       });
     });
 
@@ -50,7 +51,7 @@ describe("dispatch", () => {
       });
 
       it("increments the cursor", () => {
-        expect(result.cursor).toEqual({ line: 0, token: 1, inProgress: false });
+        expect(result.cursor).toEqual({ line: 0, token: 1 });
       });
     });
 
@@ -65,7 +66,7 @@ describe("dispatch", () => {
       });
 
       it("increments the cursor", () => {
-        expect(result.cursor).toEqual({ line: 0, token: 1, inProgress: false });
+        expect(result.cursor).toEqual({ line: 0, token: 1 });
       });
     });
   });
@@ -83,8 +84,7 @@ describe("dispatch", () => {
           expect(result.code).toEqual([["DAT", "<"]]);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 1,
-            inProgress: true
+            token: 1
           });
         });
 
@@ -95,8 +95,7 @@ describe("dispatch", () => {
           expect(result.code).toEqual([["DAT", "5"]]);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 1,
-            inProgress: true
+            token: 1
           });
         });
 
@@ -107,14 +106,13 @@ describe("dispatch", () => {
           expect(result.code).toEqual([["DAT", "start"]]);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 1,
-            inProgress: true
+            token: 1
           });
         });
       });
       describe("when the operand has already been started", () => {
         it("can NOT type in an addressing mode symbol", () => {
-          const state = stateFactory("DAT #1", [0, 1, 1]);
+          const state = stateFactory("DAT #1", [0, 1]);
           result = dispatch(
             state,
             typeOperandModeAction(AddressingMode.Autodecrement)
@@ -132,8 +130,8 @@ describe("dispatch", () => {
           expect(result.cursor).toEqual(state.cursor);
         });
 
-        // TODO: Math fucks this up
-        it("can not type in a label", () => {
+        // TODO: Math makes this complicated
+        xit("can not type in a label", () => {
           const state = stateFactory("DAT #5", [0, 1, 1]);
           result = dispatch(state, typeOperandLabelAction("start"));
 
@@ -156,8 +154,7 @@ describe("dispatch", () => {
           expect(result.code).toEqual(state.code);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 2,
-            inProgress: false
+            token: 2
           });
         });
       });
@@ -172,8 +169,7 @@ describe("dispatch", () => {
           expect(result.code).toEqual(state.code);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 1,
-            inProgress: false
+            token: 1
           });
         });
       });
@@ -189,8 +185,7 @@ describe("dispatch", () => {
         it("moves on to the next line", () => {
           expect(result.cursor).toEqual({
             line: 1,
-            token: 0,
-            inProgress: false
+            token: 0
           });
         });
       });
@@ -205,8 +200,7 @@ describe("dispatch", () => {
           expect(result.code).toEqual(state.code);
           expect(result.cursor).toEqual({
             line: 0,
-            token: 2,
-            inProgress: false
+            token: 2
           });
         });
       });
@@ -217,7 +211,72 @@ describe("dispatch", () => {
     it("should move the cursor", () => {
       state = stateFactory("", [0, 0]);
       result = dispatch(state, setCursorAction(1, 3));
-      expect(result.cursor).toEqual({ line: 1, token: 3, inProgress: false });
+      expect(result.cursor).toEqual({ line: 1, token: 3 });
+    });
+  });
+
+  describe("backspace", () => {
+    describe("when the token is an opcode", () => {
+      describe("when it exists", () => {
+        it("should delete the opcode", () => {
+          state = stateFactory("DAT 0 0; JMP 1 7", [1, 0]);
+          result = dispatch(state, backspaceAction());
+
+          expect(result.code).toEqual([
+            ["DAT", "0", "0"],
+            [undefined, "1", "7"]
+          ]);
+          expect(result.cursor).toEqual(result.cursor);
+        });
+      });
+
+      describe("when it doesn't exist", () => {
+        it("should move the cursor", () => {
+          state = initialState({
+            code: [["DAT", "0", "0"], [undefined, "1", "2"]],
+            cursor: { line: 1, token: 0 }
+          });
+          result = dispatch(state, backspaceAction());
+
+          expect(result.code).toEqual(state.code);
+          expect(result.cursor).toEqual({
+            line: 0,
+            token: 2
+          });
+        });
+      });
+    });
+
+    describe("when the token is an operand", () => {
+      describe("when the operand still has characters left", () => {
+        it("should delete one", () => {
+          state = stateFactory("JMP 123 7", [0, 1]);
+          result = dispatch(state, backspaceAction());
+
+          expect(result.code).toEqual([["JMP", "12", "7"]]);
+          expect(result.cursor).toEqual(result.cursor);
+        });
+      });
+
+      describe("when the operand has no characters", () => {
+        it("should set the cursor to the previous token", () => {
+          state = stateFactory("JMP 1 7", [0, 1]);
+          result = dispatch(state, backspaceAction());
+          result = dispatch(result, backspaceAction());
+
+          expect(result.code).toEqual([["JMP", undefined, "7"]]);
+          expect(result.cursor).toEqual({
+            line: 0,
+            token: 0
+          });
+        });
+      });
+
+      xdescribe("when the operand is a label", () => {
+        it("should delete the whole label", () => {});
+      });
+
+      xdescribe("when the operand is complex math", () => {});
     });
   });
 });

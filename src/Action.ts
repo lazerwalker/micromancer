@@ -1,4 +1,4 @@
-import { Opcode, AddressingMode, addressingModeString } from "./types";
+import { AddressingMode, addressingModeString } from "./types";
 import { CursorPosition } from "./State";
 
 export enum ActionType {
@@ -7,7 +7,8 @@ export enum ActionType {
   TypeOperandDigit,
   TypeOperandMode,
   TypeOperandLabel,
-  SetCursor
+  SetCursor,
+  Backspace
 }
 
 export interface Action<T> {
@@ -56,6 +57,13 @@ export const setCursorAction = (
 ): Action<CursorPosition> => {
   return {
     type: ActionType.SetCursor,
-    value: { line, token, inProgress: false }
+    value: { line, token }
+  };
+};
+
+export const backspaceAction = (): Action<undefined> => {
+  return {
+    type: ActionType.Backspace,
+    value: undefined
   };
 };
