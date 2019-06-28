@@ -7,6 +7,18 @@ export enum AddressingMode {
   Autodecrement // TODO: Distinguish between 86 and 88 (and 94?)
 }
 
+const addressingModeMap = {
+  [AddressingMode.Direct]: "$",
+  [AddressingMode.Immediate]: "#",
+  [AddressingMode.Indirect]: "@",
+  [AddressingMode.Autodecrement]: "<",
+  [AddressingMode.Direct]: ""
+};
+
+export function addressingModeString(mode: AddressingMode) {
+  return addressingModeMap[mode] || "";
+}
+
 export enum Opcode {
   DAT,
   MOV,

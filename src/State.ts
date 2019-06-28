@@ -6,10 +6,15 @@ export interface State {
 }
 
 export const initialState = (props?: Partial<State>): State => {
-  return { code: [], cursor: { line: 0, token: 0 }, ...props };
+  return {
+    code: [],
+    cursor: { line: 0, token: 0, inProgress: false },
+    ...props
+  };
 };
 
 interface CursorPosition {
   line: number;
   token: number;
+  inProgress: boolean;
 }

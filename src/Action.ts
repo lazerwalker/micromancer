@@ -1,9 +1,11 @@
-import { Opcode } from "./types";
+import { Opcode, AddressingMode, addressingModeString } from "./types";
 
 export enum ActionType {
   NextWord,
   TypeOpcode,
-  TypeOperand
+  TypeOperandDigit,
+  TypeOperandMode,
+  TypeOperandLabel
 }
 
 export interface Action {
@@ -18,9 +20,29 @@ export const typeOpcodeAction = (opcode: Opcode): Action => {
   };
 };
 
-export const typeOperandAction = (operand: string): Action => {
+export const typeOperandModeAction = (mode: AddressingMode): Action => {
   return {
-    type: ActionType.TypeOperand,
-    value: operand
+    type: ActionType.TypeOperandMode,
+    value: addressingModeString(mode)
+  };
+};
+
+export const typeOperandDigitAction = (digit: number): Action => {
+  return {
+    type: ActionType.TypeOperandDigit,
+    value: digit.toString()
+  };
+};
+
+export const typeOperandLabelAction = (label: string): Action => {
+  return {
+    type: ActionType.TypeOperandLabel,
+    value: label.toString()
+  };
+};
+
+export const nextWordAction = (): Action => {
+  return {
+    type: ActionType.NextWord
   };
 };
