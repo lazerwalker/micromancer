@@ -48,12 +48,18 @@ button {
   touch-action: manipulation;
 }
 
+.container {
+  margin: 30px;
+}
+
 .code-box {
-  border: 1px solid #ddd;
+  -webkit-overflow-scrolling: touch;
   font-family: Thicket-Mono, source-code-pro, Menlo, Monaco, Consolas,
     "Courier New", monospace;
+  height: 50vh;
   letter-spacing: 2px;
-  margin: 30px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   text-align: left;
 }
 
@@ -74,7 +80,7 @@ button {
 }
 
 .line-num.absolute {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #222;
   padding-right: 15px;
   width: 30px;
 }

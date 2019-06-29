@@ -21,3 +21,7 @@ export interface CursorPosition {
   line: number;
   token: number;
 }
+
+export function codeStringToCode(str: string): Line[] {
+  return str.split("\n").map(l => l.split(" "));
+}

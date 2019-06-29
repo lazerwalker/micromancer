@@ -6,7 +6,8 @@
 * Can tap a label to insert it if in an operand
 * Syntax highlighting
 * Negative numbers
-* Math
+* Math won't let you enter multiple symbols after another
+* Parens?
 * Animate keyboard
 * Long-press an opcode to get a description
 * Style everything to look old-timey
@@ -15,3 +16,4 @@
 * When highlighting an indirect operand, subtly highlight the thing it refers to
 * EQU label entry
 * Custom keyboard for labels / EQU
+* Spaces in math

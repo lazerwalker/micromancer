@@ -13,14 +13,27 @@ import {
   backspaceAction,
   typeOperandLabelAction
 } from "./Action";
-import { State, initialState } from "./State";
+import { State, initialState, codeStringToCode } from "./State";
 import CodeView from "./components/CodeView";
 import { addressingModeValue } from "./types";
 import { currentOperandIsValid } from "./currentOperandIsValid";
 import _ from "lodash";
 
 class App extends React.Component<{}, State> {
-  state: State = initialState();
+  state: State = initialState({
+    code: codeStringToCode(`DAT		0
+DAT		99
+MOV	@-2,	@-1
+CMP	-3,	#9
+JMP	4
+ADD	#1,	-5
+ADD	#1,	-5
+JMP	-5
+MOV	#99,	93
+JMP	93
+
+END	start`)
+  });
 
   render() {
     const { cursor } = this.state;

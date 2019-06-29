@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function(props: Props) {
-  const numberKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(k => {
+  const numberKeys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(k => {
     return (
       <button
         key={`key-${k}`}
