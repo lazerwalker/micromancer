@@ -9,10 +9,11 @@ interface Props {
 }
 
 export default function(props: Props) {
-  const numberKeys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(k => {
+  const numberKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(k => {
     return (
       <button
         key={`key-${k}`}
+        id={`numkey-${k}`}
         className="number"
         onClick={() => props.onKeyPress(k.toString())}
       >
@@ -21,46 +22,54 @@ export default function(props: Props) {
     );
   });
 
-  const addressingModes = ["#", "@", ">"].map(k => {
-    return (
-      <button
-        key={`key-${k}`}
-        className="addressingMode"
-        disabled={!props.canAddAddressingMode}
-        onClick={() => props.onKeyPress(k.toString())}
-      >
-        {k}
-      </button>
-    );
-  });
+  let leftKeys;
 
-  const mathKeys = ["-", "+", "*", "/"].map(k => {
-    return (
-      <button
-        key={`key-${k}`}
-        className="addressingMode"
-        disabled={k !== "-" && props.canAddAddressingMode}
-        onClick={() => props.onKeyPress(k)}
-      >
-        {k}
-      </button>
-    );
-  });
+  if (props.canAddAddressingMode) {
+    leftKeys = ["#", "@", ">", "-"].map(k => {
+      return (
+        <button
+          key={`key-${k}`}
+          className="addressingMode"
+          disabled={!props.canAddAddressingMode}
+          onClick={() => props.onKeyPress(k.toString())}
+        >
+          {k}
+        </button>
+      );
+    });
+  } else {
+    leftKeys = ["/", "*", "+", "-"].map(k => {
+      return (
+        <button
+          key={`key-${k}`}
+          className="addressingMode"
+          disabled={k !== "-" && props.canAddAddressingMode}
+          onClick={() => props.onKeyPress(k)}
+        >
+          {k}
+        </button>
+      );
+    });
+  }
 
   return (
     <div className="keyboard number">
+      <div className="leftKeys">{leftKeys}</div>
       <div className="numbers">{numberKeys}</div>
-      <div className="addressingModes">{addressingModes}</div>
-      <div className="mathKeys">{mathKeys}</div>
       <button
         key="done"
+        id="next-key"
         disabled={!props.canNext}
         onClick={() => props.onNext()}
       >
-        NEXT
+        next
       </button>
-      <button key="backspace" onClick={() => props.onBackspace()}>
-        backspace
+      <button
+        key="backspace"
+        id="backspace-key"
+        onClick={() => props.onBackspace()}
+      >
+        del
       </button>
     </div>
   );

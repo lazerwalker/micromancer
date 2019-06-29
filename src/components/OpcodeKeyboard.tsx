@@ -10,28 +10,45 @@ interface Props {
 }
 
 export default function(props: Props) {
-  const opcodes = Object.values(Opcode)
-    .filter(_.isString)
-    .map(o => {
-      return (
-        <button
-          key={`key-${o}`}
-          className="opcode"
-          onClick={() => props.onKeyPress(o)}
-        >
-          {o}
-        </button>
-      );
-    });
+  const makeOpcodeRow = (opcodes: string[], index: number) => {
+    const buttons = opcodes.map(makeOpcodeButton);
+    return (
+      <div className="opcode-row" key={`opcode-row-${index}`}>
+        {buttons}
+      </div>
+    );
+  };
+
+  const makeOpcodeButton = (o: string) => {
+    if (o === "spacer") {
+      return <div className="spacer" key="spacer" />;
+    }
+
+    return (
+      <button
+        key={`key-${o}`}
+        className="opcode"
+        onClick={() => props.onKeyPress(o)}
+      >
+        {o}
+      </button>
+    );
+  };
+
+  const rows = [
+    ["DAT", "MOV", "spacer", "ADD", "SUB", "spacer", "SPL"],
+    ["JMZ", "JMN", "JMP"],
+    ["DJN", "CMP", "SLT"]
+  ].map(makeOpcodeRow);
 
   return (
     <div className="opcode keyboard">
-      {opcodes}
-      <button key="next" onClick={props.onNext}>
+      <div className="opcodes">{rows}</div>
+      <button key="next" id="next-key" onClick={props.onNext}>
         next
       </button>
-      <button key="backspace" onClick={props.onBackspace}>
-        backspace
+      <button key="backspace" id="backspace-key" onClick={props.onBackspace}>
+        del
       </button>
     </div>
   );

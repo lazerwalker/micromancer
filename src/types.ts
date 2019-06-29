@@ -28,15 +28,20 @@ export function addressingModeValue(modeString: string): number {
 export enum Opcode {
   DAT,
   MOV,
+
   ADD,
   SUB,
+
   JMZ,
   JMN,
   JMP,
+
   DJN,
   CMP,
-  SPL,
   SLT,
+
+  SPL,
+
   EQU,
   END
 }

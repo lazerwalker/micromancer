@@ -24,7 +24,7 @@ body {
 
 .keyboard {
   bottom: 0;
-  flex-direction: row;
+  padding-bottom: 10px;
   max-height: 400px;
   position: absolute;
   width: 100vw;
@@ -32,16 +32,41 @@ body {
 
 .keyboard button {
   border: 1px solid black;
+  border-radius: 20px;
+
+  margin: 3px;
+
   height: 44pt;
-  margin: 10px;
-  min-width: 44pt;
+  width: 44pt;
 }
 
-pre {
-  line-height: 1.2em;
-  margin-left: 30px;
-  margin-top: 30px;
-  text-align: left;
+.keyboard .opcode-row {
+  flex-direction: row;
+  text-align: center;
+  margin-right: 50px;
+}
+
+.spacer {
+  display: inline-block;
+  width: 16px;
+}
+
+.keyboard .opcode-row:first-of-type {
+  margin-right: 0px;
+}
+
+#next-key {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 80px;
+}
+
+#backspace-key {
+  position: absolute;
+  right: 10px;
+  bottom: 75px;
+  width: 80px;
 }
 
 button {
@@ -116,4 +141,28 @@ button {
 
 .code-instruction .token.selected {
   background-color: #aaa;
+}
+
+/** numeric keyboard */
+
+.keyboard.number {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.keyboard .numbers {
+  margin: auto;
+  padding-right: 20%;
+  width: 50vw;
+}
+
+.keyboard .leftKeys {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+#numkey-0 {
+  width: 100px;
 }
