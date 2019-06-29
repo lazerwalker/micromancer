@@ -7,6 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: "Gamegirl";
+  src: URL("Gamegirl.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Thicket-Mono";
+  src: URL("ChevyRay - Thicket Mono.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chocolate-Mono";
+  src: URL("ChevyRay - Chocolate Mono.ttf") format("truetype");
+}
+
 .keyboard {
   bottom: 0;
   flex-direction: row;
@@ -35,8 +50,9 @@ button {
 
 .code-box {
   border: 1px solid #ddd;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: Thicket-Mono, source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+  letter-spacing: 2px;
   margin: 30px;
   text-align: left;
 }
@@ -54,13 +70,13 @@ button {
 .line-num.relative {
   color: #bbb;
   text-align: right;
-  width: 20px;
+  width: 40px;
 }
 
 .line-num.absolute {
   border-right: 1px solid #ccc;
   padding-right: 15px;
-  width: 20px;
+  width: 30px;
 }
 
 .code-instruction {
