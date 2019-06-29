@@ -13,3 +13,5 @@
 * Indicate invalid lines, and empty token spaces
 * Empty token spots have a min-width
 * When highlighting an indirect operand, subtly highlight the thing it refers to
+* EQU label entry
+* Custom keyboard for labels / EQU

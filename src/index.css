@@ -81,7 +81,13 @@ button {
 }
 
 .code-instruction .token {
-  padding-right: 12px;
+  margin-right: 2px;
+  padding: 3px 10px 3px 10px;
+}
+
+.token.empty {
+  border: 1px solid red;
+  padding-left: 35px;
 }
 
 .code-instruction .token.selected {

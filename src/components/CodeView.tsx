@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Line } from "../Line";
 import classNames from "classnames";
+import _ from "lodash";
 
 interface Props {
   code: Line[];
@@ -18,7 +19,8 @@ export default function(props: Props) {
         "operand-1": ti === 1,
         "operand-2": ti === 2,
         selected: i === props.currentLine && ti === props.currentToken,
-        operand: ti !== 0
+        operand: ti !== 0,
+        empty: _.isUndefined(t)
       });
       return (
         <span
