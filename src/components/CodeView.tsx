@@ -86,7 +86,16 @@ export default function(props: Props) {
   });
   return (
     <div className="container">
-      <div className="code-box crt">{codeLines}</div>
+      <div
+        className="code-box crt"
+        style={{
+          background: `linear-gradient(to right, ${Bim.bold.color1} 105px, ${
+            Bim.bgColor
+          } 100px)`
+        }}
+      >
+        {codeLines}
+      </div>
     </div>
   );
 }

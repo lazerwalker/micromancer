@@ -49,17 +49,19 @@ button {
 }
 
 .container {
+  height: 320px;
   margin: 30px;
 }
 
 .code-box {
   -webkit-overflow-scrolling: touch;
-  font-family: Thicket-Mono, source-code-pro, Menlo, Monaco, Consolas,
-    "Courier New", monospace;
-  height: 50vh;
-  letter-spacing: 2px;
   overflow-x: hidden;
   overflow-y: scroll;
+  font-family: Thicket-Mono, source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+  height: 100%;
+  letter-spacing: 2px;
+  padding-top: 20px;
   text-align: left;
 }
 
