@@ -2,7 +2,9 @@ import { State } from "./State";
 import { Action, ActionType } from "./Action";
 import _ from "lodash";
 
-export function dispatch(state: State, action: Action<any>): State {
+export type Dispatch = (action: Action<any>) => void;
+
+export function reducer(state: State, action: Action<any>): State {
   const newState = _.cloneDeep(state);
 
   const { cursor, code } = newState;

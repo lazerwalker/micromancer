@@ -1,23 +1,9 @@
 import React from "react";
 import "./App.css";
-import OpcodeKeyboard from "./components/OpcodeKeyboard";
-import NumberKeyboard from "./components/NumberKeyboard";
-import { dispatch } from "./dispatch";
-import {
-  Action,
-  typeOperandDigitAction,
-  typeOperandModeAction,
-  nextWordAction,
-  typeOpcodeAction,
-  setCursorAction,
-  backspaceAction,
-  typeOperandLabelAction
-} from "./Action";
+import { Dispatch, reducer } from "./reducer";
 import { State, initialState, codeStringToCode } from "./State";
-import CodeView from "./components/CodeView";
-import { addressingModeValue } from "./types";
-import { currentOperandIsValid } from "./currentOperandIsValid";
-import _ from "lodash";
+import { Action } from "./Action";
+import { EditorView } from "./components/EditorView";
 
 class App extends React.Component<{}, State> {
   state: State = initialState({
@@ -36,84 +22,17 @@ END	start`)
   });
 
   render() {
-    const { cursor } = this.state;
-
-    const token = this.state.code[this.state.cursor.line][
-      this.state.cursor.token
-    ];
-
-    let keyboard;
-    if (cursor.token === 0) {
-      keyboard = (
-        <OpcodeKeyboard
-          onKeyPress={this.typeOpcode}
-          onNext={this.next}
-          onBackspace={this.didTypeBackspace}
-        />
-      );
-    } else {
-      keyboard = (
-        <NumberKeyboard
-          onKeyPress={this.typeDigitOrMode}
-          onBackspace={this.didTypeBackspace}
-          onNext={this.next}
-          canAddAddressingMode={_.isUndefined(token) || token.length === 0}
-          canNext={currentOperandIsValid(this.state)}
-        />
-      );
-    }
-
     return (
-      <div className="App">
-        <CodeView
-          code={this.state.code}
-          currentLine={this.state.cursor.line}
-          currentToken={this.state.cursor.token}
-          onLineClick={this.clickLine}
-          onTokenClick={this.clickToken}
-        />
-        {keyboard}
-      </div>
+      <EditorView
+        dispatch={this.dispatch}
+        code={this.state.code}
+        cursor={this.state.cursor}
+      />
     );
   }
 
-  clickLine = (line: number) => {
-    if (line === this.state.cursor.line) {
-      return;
-    }
-    this.setState(dispatch(this.state, setCursorAction(line, 0)));
-  };
-
-  clickToken = (line: number, token: number) => {
-    console.log("Click token");
-    this.setState(dispatch(this.state, setCursorAction(line, token)));
-  };
-
-  typeOpcode = (k: string) => {
-    const newState = dispatch(this.state, typeOpcodeAction(k));
-    this.setState(newState);
-  };
-
-  typeDigitOrMode = (d: string) => {
-    let action: Action<string>;
-    if (parseInt(d, 10).toString() === d) {
-      action = typeOperandDigitAction(parseInt(d));
-    } else if (addressingModeValue(d)) {
-      action = typeOperandModeAction(addressingModeValue(d));
-    } else {
-      action = typeOperandLabelAction(d);
-    }
-    // TODO: Math
-
-    this.setState(dispatch(this.state, action));
-  };
-
-  next = () => {
-    this.setState(dispatch(this.state, nextWordAction()));
-  };
-
-  didTypeBackspace = () => {
-    this.setState(dispatch(this.state, backspaceAction()));
+  dispatch: Dispatch = (action: Action<any>) => {
+    this.setState(reducer(this.state, action));
   };
 }
 

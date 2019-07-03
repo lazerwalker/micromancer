@@ -1,7 +1,4 @@
 import * as React from "react";
-import * as _ from "lodash";
-
-import { Opcode } from "../types";
 
 interface Props {
   onKeyPress: (opcode: string) => void;

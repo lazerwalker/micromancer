@@ -1,9 +1,12 @@
-import { State } from "./State";
+import { CursorPosition } from "./State";
 import { addressingModeValue } from "./types";
+import { Line } from "./Line";
 
-export function currentOperandIsValid(state: State): boolean {
-  const { code, cursor } = state;
-  const operand = code[cursor.line][cursor.token];
+export function currentOperandIsValid(state: {
+  code: Line[];
+  cursor: CursorPosition;
+}): boolean {
+  const operand = state.code[state.cursor.line][state.cursor.token];
 
   if (!operand) return false;
 

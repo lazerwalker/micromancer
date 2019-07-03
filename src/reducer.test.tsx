@@ -8,7 +8,7 @@ import {
   setCursorAction,
   backspaceAction
 } from "./Action";
-import { dispatch } from "./dispatch";
+import { reducer } from "./reducer";
 import { Opcode, AddressingMode } from "./types";
 
 const stateFactory = (code: string, pos: number[]): State => {
@@ -20,7 +20,7 @@ const stateFactory = (code: string, pos: number[]): State => {
   });
 };
 
-describe("dispatch", () => {
+describe("reducer", () => {
   let state: State;
   let result: State;
 
@@ -28,7 +28,7 @@ describe("dispatch", () => {
     describe("when the line doesn't exist", () => {
       beforeEach(() => {
         state = initialState({ code: [] });
-        result = dispatch(state, typeOpcodeAction("JMP"));
+        result = reducer(state, typeOpcodeAction("JMP"));
       });
 
       it("adds the opcode", () => {
@@ -43,7 +43,7 @@ describe("dispatch", () => {
     describe("when the line exists but has no opcode", () => {
       beforeEach(() => {
         state = initialState({ code: [[]] });
-        result = dispatch(state, typeOpcodeAction("JMP"));
+        result = reducer(state, typeOpcodeAction("JMP"));
       });
 
       it("adds the opcode", () => {
@@ -58,7 +58,7 @@ describe("dispatch", () => {
     describe("when the line already has an opcode", () => {
       beforeEach(() => {
         state = stateFactory("DAT 0 1", [0, 0]);
-        result = dispatch(state, typeOpcodeAction("JMP"));
+        result = reducer(state, typeOpcodeAction("JMP"));
       });
 
       it("overwrites the existing opcode", () => {
@@ -76,7 +76,7 @@ describe("dispatch", () => {
       describe("when no part of the operand has been entered yet", () => {
         it("can type in an addressing mode symbol", () => {
           const state = stateFactory("DAT", [0, 1]);
-          result = dispatch(
+          result = reducer(
             state,
             typeOperandModeAction(AddressingMode.Autodecrement)
           );
@@ -90,7 +90,7 @@ describe("dispatch", () => {
 
         it("can type in a number", () => {
           const state = stateFactory("DAT", [0, 1]);
-          result = dispatch(state, typeOperandDigitAction(5));
+          result = reducer(state, typeOperandDigitAction(5));
 
           expect(result.code).toEqual([["DAT", "5"]]);
           expect(result.cursor).toEqual({
@@ -101,7 +101,7 @@ describe("dispatch", () => {
 
         it("can type in a label", () => {
           const state = stateFactory("DAT", [0, 1]);
-          result = dispatch(state, typeOperandLabelAction("start"));
+          result = reducer(state, typeOperandLabelAction("start"));
 
           expect(result.code).toEqual([["DAT", "start"]]);
           expect(result.cursor).toEqual({
@@ -113,7 +113,7 @@ describe("dispatch", () => {
       describe("when the operand has already been started", () => {
         it("can NOT type in an addressing mode symbol", () => {
           const state = stateFactory("DAT #1", [0, 1]);
-          result = dispatch(
+          result = reducer(
             state,
             typeOperandModeAction(AddressingMode.Autodecrement)
           );
@@ -124,7 +124,7 @@ describe("dispatch", () => {
 
         it("can type in a number", () => {
           const state = stateFactory("DAT <3", [0, 1, 1]);
-          result = dispatch(state, typeOperandDigitAction(5));
+          result = reducer(state, typeOperandDigitAction(5));
 
           expect(result.code).toEqual([["DAT", "<35"]]);
           expect(result.cursor).toEqual(state.cursor);
@@ -133,7 +133,7 @@ describe("dispatch", () => {
         // TODO: Math makes this complicated
         xit("can not type in a label", () => {
           const state = stateFactory("DAT #5", [0, 1, 1]);
-          result = dispatch(state, typeOperandLabelAction("start"));
+          result = reducer(state, typeOperandLabelAction("start"));
 
           expect(result.code).toEqual([["DAT", "#5"]]);
           expect(result.cursor).toEqual(state.cursor);
@@ -147,7 +147,7 @@ describe("dispatch", () => {
       describe("when the first operand exists", () => {
         beforeEach(() => {
           state = stateFactory("DAT 0 1", [0, 1]);
-          result = dispatch(state, nextWordAction());
+          result = reducer(state, nextWordAction());
         });
 
         it("moves on to the next word", () => {
@@ -162,7 +162,7 @@ describe("dispatch", () => {
       describe("when the first operand does not exist", () => {
         beforeEach(() => {
           state = stateFactory("DAT", [0, 1]);
-          result = dispatch(state, nextWordAction());
+          result = reducer(state, nextWordAction());
         });
 
         it("does nothing", () => {
@@ -179,7 +179,7 @@ describe("dispatch", () => {
       describe("when the second operand exists", () => {
         beforeEach(() => {
           state = stateFactory("DAT 0 1", [0, 2]);
-          result = dispatch(state, nextWordAction());
+          result = reducer(state, nextWordAction());
         });
 
         it("moves on to the next line", () => {
@@ -193,7 +193,7 @@ describe("dispatch", () => {
       describe("when the second operand does not exist", () => {
         beforeEach(() => {
           state = stateFactory("DAT 0", [0, 2]);
-          result = dispatch(state, nextWordAction());
+          result = reducer(state, nextWordAction());
         });
 
         it("does nothing", () => {
@@ -210,7 +210,7 @@ describe("dispatch", () => {
   describe("setCursor", () => {
     it("should move the cursor", () => {
       state = stateFactory("", [0, 0]);
-      result = dispatch(state, setCursorAction(1, 3));
+      result = reducer(state, setCursorAction(1, 3));
       expect(result.cursor).toEqual({ line: 1, token: 3 });
     });
   });
@@ -220,7 +220,7 @@ describe("dispatch", () => {
       describe("when it exists", () => {
         it("should delete the opcode", () => {
           state = stateFactory("DAT 0 0; JMP 1 7", [1, 0]);
-          result = dispatch(state, backspaceAction());
+          result = reducer(state, backspaceAction());
 
           expect(result.code).toEqual([
             ["DAT", "0", "0"],
@@ -236,7 +236,7 @@ describe("dispatch", () => {
             code: [["DAT", "0", "0"], [undefined, "1", "2"]],
             cursor: { line: 1, token: 0 }
           });
-          result = dispatch(state, backspaceAction());
+          result = reducer(state, backspaceAction());
 
           expect(result.code).toEqual(state.code);
           expect(result.cursor).toEqual({
@@ -251,7 +251,7 @@ describe("dispatch", () => {
       describe("when the operand still has characters left", () => {
         it("should delete one", () => {
           state = stateFactory("JMP 123 7", [0, 1]);
-          result = dispatch(state, backspaceAction());
+          result = reducer(state, backspaceAction());
 
           expect(result.code).toEqual([["JMP", "12", "7"]]);
           expect(result.cursor).toEqual(result.cursor);
@@ -261,8 +261,8 @@ describe("dispatch", () => {
       describe("when the operand has no characters", () => {
         it("should set the cursor to the previous token", () => {
           state = stateFactory("JMP 1 7", [0, 1]);
-          result = dispatch(state, backspaceAction());
-          result = dispatch(result, backspaceAction());
+          result = reducer(state, backspaceAction());
+          result = reducer(result, backspaceAction());
 
           expect(result.code).toEqual([["JMP", undefined, "7"]]);
           expect(result.cursor).toEqual({
