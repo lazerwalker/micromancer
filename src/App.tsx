@@ -1,38 +1,58 @@
-import React from "react";
+import React, { Reducer } from "react";
 import "./App.css";
-import { Dispatch, reducer } from "./reducer";
-import { State, initialState, codeStringToCode } from "./State";
+import { Dispatch, createReducerAndState } from "./reducer";
+import { State } from "./State";
 import { Action } from "./Action";
-import { EditorView } from "./components/EditorView";
+// import { EditorView } from "./components/EditorView";
+import { DebugView } from "./components/DebugView";
+import { VM, parse } from "corewars-js";
+
+const program = "MOV 0, 1";
+
+// const program = `DAT 0
+// DAT 99
+// MOV @-2, @-1
+// CMP -3,	#9
+// JMP 4
+// ADD #1, -5
+// ADD #1, -5
+// JMP -5
+// MOV #99, 93
+// JMP 93
+
+// END	start`;
 
 class App extends React.Component<{}, State> {
-  state: State = initialState({
-    code: codeStringToCode(`DAT 0
-DAT 99
-MOV @-2 @-1
-CMP -3	#9
-JMP 4
-ADD #1 -5
-ADD #1 -5
-JMP -5
-MOV #99 93
-JMP 93
+  state: State;
+  reducer: Reducer<State, Action<any>>;
 
-END	start`)
-  });
+  constructor(props: {}) {
+    super(props);
 
+    const programs = [parse(program)];
+    const { state, reducer } = createReducerAndState(programs, program);
+    this.state = state;
+    this.reducer = reducer;
+  }
   render() {
     return (
-      <EditorView
-        dispatch={this.dispatch}
+      // <EditorView
+      //   dispatch={this.dispatch}
+      //   code={this.state.code}
+      //   cursor={this.state.cursor}
+      // />
+      <DebugView
         code={this.state.code}
-        cursor={this.state.cursor}
+        dispatch={this.dispatch}
+        memory={this.state.memory}
+        warriors={this.state.warriors}
       />
     );
   }
 
   dispatch: Dispatch = (action: Action<any>) => {
-    this.setState(reducer(this.state, action));
+    console.log("Dispatching", action);
+    this.setState(this.reducer(this.state, action));
   };
 }
 

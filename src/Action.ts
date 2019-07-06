@@ -8,7 +8,14 @@ export enum ActionType {
   TypeOperandMode,
   TypeOperandLabel,
   SetCursor,
-  Backspace
+  Backspace,
+
+  DebugRestart,
+  DebugUndo,
+  DebugPause,
+  DebugNext,
+  DebugPlay,
+  DebugFast
 }
 
 export interface Action<T> {
@@ -64,6 +71,48 @@ export const setCursorAction = (
 export const backspaceAction = (): Action<undefined> => {
   return {
     type: ActionType.Backspace,
+    value: undefined
+  };
+};
+
+export const debugRestartAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugRestart,
+    value: undefined
+  };
+};
+
+export const debugUndoAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugUndo,
+    value: undefined
+  };
+};
+
+export const debugPauseAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugPause,
+    value: undefined
+  };
+};
+
+export const debugPlayAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugPlay,
+    value: undefined
+  };
+};
+
+export const debugNextAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugNext,
+    value: undefined
+  };
+};
+
+export const debugFastAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugFast,
     value: undefined
   };
 };

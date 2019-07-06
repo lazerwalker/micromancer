@@ -58,7 +58,8 @@ body {
   width: 70px;
 }
 
-.keyboard button {
+/* .keyboard button { */
+button {
   background-color: orangered;
   color: goldenrod;
   border: 1px solid black;

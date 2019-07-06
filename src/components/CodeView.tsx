@@ -10,8 +10,8 @@ interface Props {
   code: Line[];
   currentLine: number;
   currentToken: number;
-  onLineClick: (line: number) => void;
-  onTokenClick: (line: number, token: number) => void;
+  onLineClick?: (line: number) => void;
+  onTokenClick?: (line: number, token: number) => void;
 }
 
 export default function(props: Props) {
@@ -44,7 +44,7 @@ export default function(props: Props) {
           className={tokenClasses}
           key={`token-${i}-${ti}`}
           onClick={(e: any) => {
-            props.onTokenClick(i, ti);
+            props.onTokenClick && props.onTokenClick(i, ti);
             e.stopPropagation();
           }}
           style={style}
@@ -62,7 +62,7 @@ export default function(props: Props) {
       <div
         className={klass}
         key={`line-${i}`}
-        onClick={() => props.onLineClick(i)}
+        onClick={() => props.onLineClick && props.onLineClick(i)}
         style={{
           backgroundColor: Bim.bgColor,
           color: Bim.fgColor

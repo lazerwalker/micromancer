@@ -1,8 +1,11 @@
 import { Line } from "./Line";
+import { Instruction, Warrior } from "corewars-js";
 
 export interface State {
   code: Line[];
   cursor: CursorPosition;
+  memory: Instruction[];
+  warriors: Warrior[];
 }
 
 export const initialState = (props?: Partial<State>): State => {
@@ -13,6 +16,8 @@ export const initialState = (props?: Partial<State>): State => {
   return {
     code,
     cursor: { line: 0, token: 0 },
+    memory: [],
+    warriors: [],
     ...props
   };
 };

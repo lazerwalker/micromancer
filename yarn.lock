@@ -2952,14 +2952,13 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-corewars-js@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/corewars-js/-/corewars-js-0.0.1.tgz#6badc14b112ed60072a70a569b7765af2ae0f1a0"
-  integrity sha512-/ROdjJiAR3uM8Ek0vMlq9EljMDbK7nLH3NHyEdEOmHW09pDazgbJaxWZAxkLiT++3JoqvlrCuD8U6SkqSAyJLg==
+corewars-js@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/corewars-js/-/corewars-js-0.0.5.tgz#fc33b9ded71e11411c68a5538c2c55a48657b255"
+  integrity sha512-8wMKtouPPqPFVLMicO2QYt6T7XfWs9wcZVwd9+3537r7RnSrH8IFvicUg9xUkIKyuf711qSRLdswNBXAssNHxA==
   dependencies:
     "@types/node" "^7.0.13"
     lodash "^4.17.11"
-    node "^0.0.0"
     ohm-js "^0.14.0"
 
 cosmiconfig@^4.0.0:
@@ -5037,7 +5036,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
+inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
@@ -5046,6 +5045,11 @@ inherits@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
   integrity sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE=
+
+inherits@^2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
+  integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 ini@^1.3.5, ini@~1.3.0:
   version "1.3.5"
@@ -6757,11 +6761,6 @@ node-releases@^1.1.3:
   integrity sha512-6VrvH7z6jqqNFY200kdB6HdzkgM96Oaj9v3dqGfgp6mF+cHmU4wyQKZ2/WPDRVoR0Jz9KqbamaBN0ZhdUaysUQ==
   dependencies:
     semver "^5.3.0"
-
-node@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-0.0.0.tgz#288d62f90530c763eff8d4831ee7343ab3d60793"
-  integrity sha1-KI1i+QUwx2Pv+NSDHuc0OrPWB5M=
 
 nopt@^4.0.1:
   version "4.0.1"
