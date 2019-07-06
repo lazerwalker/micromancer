@@ -16,7 +16,7 @@ export function createReducerAndState(
   code: string,
   size: number = 80
 ): ReducerAndState {
-  const vm = new VM(programs, size);
+  let vm = new VM(programs, size);
   const s = initialState({
     code: codeStringToCode(code),
     memory: vm.memory,
@@ -122,17 +122,29 @@ export function createReducerAndState(
 
     // Debugger actions
     if (action.type === ActionType.DebugRestart) {
+      vm = new VM(programs, size);
+      newState.memory = vm.memory;
+      newState.warriors = vm.warriors;
+      return newState;
     } else if (action.type === ActionType.DebugUndo) {
     } else if (action.type === ActionType.DebugPause) {
+      newState.isPlaying = false;
+      return newState;
     } else if (action.type === ActionType.DebugNext) {
-      console.log("NEXT");
       vm.tick();
       console.log(vm.print());
+
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
       return newState;
     } else if (action.type === ActionType.DebugPlay) {
+      newState.isPlaying = true;
+      newState.playRate = 400;
+      return newState;
     } else if (action.type === ActionType.DebugFast) {
+      newState.isPlaying = true;
+      newState.playRate = 5;
+      return newState;
     }
 
     return state;

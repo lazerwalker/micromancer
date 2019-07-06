@@ -6,6 +6,9 @@ export interface State {
   cursor: CursorPosition;
   memory: Instruction[];
   warriors: Warrior[];
+
+  isPlaying: boolean;
+  playRate?: number;
 }
 
 export const initialState = (props?: Partial<State>): State => {
@@ -18,6 +21,7 @@ export const initialState = (props?: Partial<State>): State => {
     cursor: { line: 0, token: 0 },
     memory: [],
     warriors: [],
+    isPlaying: false,
     ...props
   };
 };

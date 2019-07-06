@@ -2,7 +2,7 @@ import React, { Reducer } from "react";
 import "./App.css";
 import { Dispatch, createReducerAndState } from "./reducer";
 import { State } from "./State";
-import { Action } from "./Action";
+import { Action, debugNextAction } from "./Action";
 // import { EditorView } from "./components/EditorView";
 import { DebugView } from "./components/DebugView";
 import { VM, parse } from "corewars-js";
@@ -26,6 +26,8 @@ class App extends React.Component<{}, State> {
   state: State;
   reducer: Reducer<State, Action<any>>;
 
+  timer?: number;
+
   constructor(props: {}) {
     super(props);
 
@@ -34,6 +36,25 @@ class App extends React.Component<{}, State> {
     this.state = state;
     this.reducer = reducer;
   }
+
+  componentDidUpdate() {
+    if (this.state.isPlaying && !this.timer) {
+      const tick = () => {
+        this.dispatch(debugNextAction());
+
+        if (this.state.isPlaying && this.state.playRate) {
+          this.timer = (setTimeout(
+            tick,
+            this.state.playRate
+          ) as unknown) as number;
+        } else {
+          this.timer = undefined;
+        }
+      };
+      tick();
+    }
+  }
+
   render() {
     return (
       // <EditorView
