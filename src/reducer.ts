@@ -16,7 +16,7 @@ export function createReducerAndState(
   code: string,
   size: number = 80
 ): ReducerAndState {
-  let vm = new VM(programs, size);
+  let vm = new VM(_.cloneDeep(programs), size);
   const s = initialState({
     code: codeStringToCode(code),
     memory: vm.memory,
@@ -122,7 +122,7 @@ export function createReducerAndState(
 
     // Debugger actions
     if (action.type === ActionType.DebugRestart) {
-      vm = new VM(programs, size);
+      vm = new VM(_.cloneDeep(programs), size);
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
       return newState;
