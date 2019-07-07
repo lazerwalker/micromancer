@@ -28,11 +28,7 @@ export default function(props: Props) {
       });
 
       const style: React.CSSProperties = {};
-      if (ti === 0) {
-        style.color = Bim.fgColor;
-      } else {
-        style.color = Bim.bold.color1;
-      }
+      style.color = Bim.bold.color1;
 
       if (selected) {
         style.backgroundColor = Bim.fgColor;

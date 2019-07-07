@@ -141,7 +141,7 @@ button {
   font-family: Thicket-Mono, source-code-pro, Menlo, Monaco, Consolas,
     "Courier New", monospace;
   height: 100%;
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
   padding-top: 20px;
   text-align: left;
 }
