@@ -11,6 +11,8 @@
 .memory-cell {
   border-right: 0.5px solid orangered;
   border-bottom: 0.5px solid orangered;
+  color: white;
+  font-size: 8px;
   padding: 0;
   margin: 0;
   width: 8vw;

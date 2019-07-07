@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Instruction } from "corewars-js";
+import { instructionToString } from "corewars-js";
 
 interface Props {
   instruction: Instruction;
@@ -16,9 +17,6 @@ export function MemoryCell(props: Props) {
     pc: props.isPC
   });
   return (
-    <div className={classes}>
-      {props.instruction.opcode} {props.instruction.aField},{" "}
-      {props.instruction.bField}
-    </div>
+    <div className={classes}>{instructionToString(props.instruction)}</div>
   );
 }
