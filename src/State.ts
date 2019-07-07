@@ -9,6 +9,8 @@ export interface State {
 
   isPlaying: boolean;
   playRate?: number;
+  debugTicks: number;
+  debugStartPositions?: number[];
 }
 
 export const initialState = (props?: Partial<State>): State => {
@@ -22,6 +24,7 @@ export const initialState = (props?: Partial<State>): State => {
     memory: [],
     warriors: [],
     isPlaying: false,
+    debugTicks: 0,
     ...props
   };
 };

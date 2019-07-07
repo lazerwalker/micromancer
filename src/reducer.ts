@@ -17,10 +17,12 @@ export function createReducerAndState(
   size: number = 80
 ): ReducerAndState {
   let vm = new VM(_.cloneDeep(programs), size);
+
   const s = initialState({
     code: codeStringToCode(code),
     memory: vm.memory,
-    warriors: vm.warriors
+    warriors: vm.warriors,
+    debugStartPositions: vm.warriors.map(w => w.pc[0])
   });
 
   console.log(vm.equs);
@@ -127,8 +129,24 @@ export function createReducerAndState(
       vm = new VM(_.cloneDeep(programs), size);
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
+      newState.debugTicks = 0;
+      newState.debugStartPositions = vm.warriors.map(w => w.pc[0]);
+
       return newState;
     } else if (action.type === ActionType.DebugUndo) {
+      vm = new VM(
+        _.cloneDeep(programs),
+        size,
+        undefined,
+        newState.debugStartPositions
+      );
+      for (let i = 0; i < state.debugTicks - 1; i++) {
+        vm.tick();
+      }
+      newState.memory = vm.memory;
+      newState.warriors = vm.warriors;
+      newState.debugTicks = state.debugTicks - 1;
+      return newState;
     } else if (action.type === ActionType.DebugPause) {
       newState.isPlaying = false;
       return newState;
@@ -136,6 +154,7 @@ export function createReducerAndState(
       vm.tick();
       console.log(vm.print());
 
+      newState.debugTicks += 1;
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
       return newState;
