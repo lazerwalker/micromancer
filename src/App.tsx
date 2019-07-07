@@ -5,9 +5,23 @@ import { State } from "./State";
 import { Action, debugNextAction } from "./Action";
 // import { EditorView } from "./components/EditorView";
 import { DebugView } from "./components/DebugView";
-import { VM, parse } from "corewars-js";
+import { parse } from "corewars-js";
 
-const program = "MOV 0, 1";
+// const program = "MOV 0, 1";
+
+// TODO: EQU needs to not occupy memory space.
+// Then, MOV ptr, ptr and ADD #const, ptr are something to debug.
+
+const program = `const EQU 2365
+loc MOV ptr, ptr
+ADD #const, ptr
+SUB #const, loc
+JMP loc
+ptr JMP @0, trap
+trap SPL 1, -100
+MOV bomb, <-1
+JMP trap
+bomb DAT #0`;
 
 // const program = `DAT 0
 // DAT 99
