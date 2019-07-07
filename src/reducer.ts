@@ -23,6 +23,8 @@ export function createReducerAndState(
     warriors: vm.warriors
   });
 
+  console.log(vm.equs);
+
   const reducer = (state: State, action: Action<any>): State => {
     const newState = _.cloneDeep(state);
 
