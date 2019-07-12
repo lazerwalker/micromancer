@@ -160,7 +160,7 @@ export function createReducerAndState(
       return newState;
     } else if (action.type === ActionType.DebugPlay) {
       newState.isPlaying = true;
-      newState.playRate = 400;
+      newState.playRate = 100;
       return newState;
     } else if (action.type === ActionType.DebugFast) {
       newState.isPlaying = true;

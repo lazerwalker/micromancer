@@ -1,5 +1,4 @@
 import * as React from "react";
-import CodeView from "./CodeView";
 import { Dispatch } from "../reducer";
 import { Line } from "../Line";
 import { DebugToolbar } from "./DebugToolbar";
