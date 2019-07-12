@@ -9,6 +9,8 @@ import {
   debugFastAction
 } from "../Action";
 
+import "../debugToolbar.css";
+
 interface Props {
   dispatch: Dispatch;
 }

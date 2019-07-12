@@ -12,16 +12,21 @@ import { parse } from "corewars-js";
 // TODO: EQU needs to not occupy memory space.
 // Then, MOV ptr, ptr and ADD #const, ptr are something to debug.
 
-const program = `const EQU 2365
-loc MOV ptr, ptr
-ADD #const, ptr
-SUB #const, loc
-JMP loc
-ptr JMP @0, trap
-trap SPL 1, -100
-MOV bomb, <-1
-JMP trap
-bomb DAT #0`;
+// const program = `const EQU 2365
+// loc MOV ptr, ptr
+// ADD #const, ptr
+// SUB #const, loc
+// JMP loc
+// ptr JMP @0, trap
+// trap SPL 1, -100
+// MOV bomb, <-1
+// JMP trap
+// bomb DAT #0`;
+
+const program = `ADD #4, 3
+MOV 2, @2
+JMP -2
+DAT #0, #0`;
 
 // const program = `DAT 0
 // DAT 99

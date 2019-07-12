@@ -1,22 +1,24 @@
 .memory-view {
   border-left: 0.5px solid orangered;
   border-top: 0.5px solid orangered;
+
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
-  max-height: 300px;
+  margin: 10px;
   text-align: center;
 }
 
 .memory-cell {
   border-right: 0.5px solid orangered;
   border-bottom: 0.5px solid orangered;
+  box-sizing: border-box;
   color: white;
   font-size: 8px;
   padding: 0;
   margin: 0;
-  width: 8vw;
-  height: 8vw;
+  width: 10%;
+  height: 10vw;
 }
 
 .memory-cell.warrior-1 {
