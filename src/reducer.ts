@@ -45,6 +45,7 @@ export function createReducerAndState(
 
       line[0] = action.value;
       cursor.token = 1;
+      cursor.isMidOperand = false;
 
       return newState;
     } else if (action.type === ActionType.TypeOperandDigit) {
@@ -54,7 +55,14 @@ export function createReducerAndState(
 
       if (!line) return state;
 
-      line[cursor.token] = (line[cursor.token] || "") + action.value;
+      if (cursor.isMidOperand) {
+        // If you JUST typed in this operand, keep going
+        line[cursor.token] = (line[cursor.token] || "") + action.value;
+      } else {
+        // Otherwise, overwrite the whole operand
+        line[cursor.token] = action.value;
+        cursor.isMidOperand = true;
+      }
 
       return newState;
     } else if (action.type === ActionType.TypeOperandLabel) {
@@ -64,23 +72,29 @@ export function createReducerAndState(
 
       if (!line) return state;
 
-      line[cursor.token] = (line[cursor.token] || "") + action.value;
+      // TODO: This should probably be a discrete action
+      if (action.value === "-" && !cursor.isMidOperand) {
+        cursor.isMidOperand = true;
+        line[cursor.token] = action.value;
+      } else {
+        cursor.isMidOperand = false;
+        line[cursor.token] = (line[cursor.token] || "") + action.value;
+      }
 
       return newState;
     } else if (action.type === ActionType.TypeOperandMode) {
       if (cursor.token !== 1 && cursor.token !== 2) {
         return state;
       }
-
       if (!line) return state;
-
-      const token = line[cursor.token];
-      if (token && token.length > 0) return state;
-
+      if (cursor.isMidOperand) return state;
       line[cursor.token] = action.value;
+      cursor.isMidOperand = true;
 
       return newState;
     } else if (action.type === ActionType.NextWord) {
+      cursor.isMidOperand = false;
+
       if (line[cursor.token]) {
         if (cursor.token === 1) {
           cursor.token = 2;
@@ -102,8 +116,9 @@ export function createReducerAndState(
       return newState;
     } else if (action.type === ActionType.Backspace) {
       const token = line[cursor.token];
-      // Opcode
+
       if (cursor.token === 0) {
+        // Opcode
         if (_.isUndefined(token)) {
           if (cursor.line >= 0) {
             cursor.line -= 1;
@@ -114,9 +129,10 @@ export function createReducerAndState(
         }
         return newState;
       } else {
+        // Operand
         if (_.isUndefined(token)) {
           cursor.token -= 1;
-        } else if (token.length > 1) {
+        } else if (cursor.isMidOperand && token.length > 1) {
           line[cursor.token] = token.slice(0, token.length - 1);
         } else {
           line[cursor.token] = undefined;

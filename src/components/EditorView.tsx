@@ -47,7 +47,7 @@ export class EditorView extends React.Component<Props, {}> {
           onKeyPress={this.typeDigitOrMode}
           onBackspace={this.didTypeBackspace}
           onNext={this.next}
-          canAddAddressingMode={_.isUndefined(token) || token.length === 0}
+          canAddAddressingMode={!cursor.isMidOperand}
           canNext={currentOperandIsValid(this.props)}
           isEndOfLine={cursor.token === 2}
         />
@@ -93,11 +93,16 @@ export class EditorView extends React.Component<Props, {}> {
   };
 
   typeDigitOrMode = (d: string) => {
+    // '-' isn't an addressing mode, but our term 'mode' here is wrong
+    // It really just means "a non-digit symbol that isn't a label or math that can be at the start of an operand"
+    const validModes = ["#", "@", ">", "-"];
     let action: Action<string>;
     if (parseInt(d, 10).toString() === d) {
       action = typeOperandDigitAction(parseInt(d));
-    } else if (addressingModeValue(d)) {
+    } else if (!_.isUndefined(addressingModeValue(d))) {
       action = typeOperandModeAction(addressingModeValue(d));
+    } else if (d === "-") {
+      action = typeOperandLabelAction(d);
     } else {
       action = typeOperandLabelAction(d);
     }

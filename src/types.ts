@@ -13,7 +13,7 @@ const addressingModeMap: { [s: string]: AddressingMode } = {
   $: AddressingMode.Direct,
   "#": AddressingMode.Immediate,
   "@": AddressingMode.Indirect,
-  "<": AddressingMode.Autodecrement,
+  ">": AddressingMode.Autodecrement,
   "": AddressingMode.Direct
 };
 

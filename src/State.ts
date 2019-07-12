@@ -29,7 +29,7 @@ export const initialState = (props?: Partial<State>): State => {
   }
   return {
     code,
-    cursor: { line: 0, token: 0 },
+    cursor: { line: 0, token: 0, isMidOperand: false },
     memory: [],
     warriors: [],
     isPlaying: false,
@@ -43,6 +43,7 @@ export const initialState = (props?: Partial<State>): State => {
 export interface CursorPosition {
   line: number;
   token: number;
+  isMidOperand: boolean;
 }
 
 export function codeStringToCode(str: string): Line[] {

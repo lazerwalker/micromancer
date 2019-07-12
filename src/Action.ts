@@ -67,7 +67,7 @@ export const setCursorAction = (
 ): Action<CursorPosition> => {
   return {
     type: ActionType.SetCursor,
-    value: { line, token }
+    value: { line, token, isMidOperand: false }
   };
 };
 
