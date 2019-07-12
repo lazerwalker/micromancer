@@ -145,14 +145,26 @@ export function createReducerAndState(
       }
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
+      newState.winner = undefined;
       newState.debugTicks = state.debugTicks - 1;
       return newState;
     } else if (action.type === ActionType.DebugPause) {
       newState.isPlaying = false;
       return newState;
     } else if (action.type === ActionType.DebugNext) {
-      vm.tick();
-      console.log(vm.print());
+      if (!_.isUndefined(state.winner)) {
+        console.log("Can't continue, game is over");
+        return state;
+      }
+
+      const result = vm.tick();
+      if (_.isUndefined(result)) {
+        newState.winner = _.indexOf(vm.warriors, vm.winner());
+        newState.isPlaying = false;
+        alert(`Player ${newState.winner + 1} won!`);
+      } else {
+        console.log(vm.print());
+      }
 
       newState.debugTicks += 1;
       newState.memory = vm.memory;

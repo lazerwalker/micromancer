@@ -8,6 +8,7 @@ export interface State {
   warriors: Warrior[];
 
   isPlaying: boolean;
+  winner?: number; // TODO: This suggests we need a richer 'warrior' data structure with metadata
   playRate?: number;
   debugTicks: number;
   debugStartPositions?: number[];
