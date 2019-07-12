@@ -6,6 +6,7 @@ import { MemoryView } from "./MemoryView";
 import { Instruction, Warrior } from "corewars-js";
 
 import "../debugView.css";
+import { switchToEditorAction } from "../Action";
 
 interface Props {
   code: Line[];
@@ -24,9 +25,15 @@ export class DebugView extends React.Component<Props, {}> {
           warriors={this.props.warriors}
           nextPC={this.props.nextPC}
         />
-        <DebugToolbar dispatch={this.props.dispatch} />
+        <button onClick={this.switchToEditor} id="show-editor">
+          edit
+        </button>
         <div id="logo">omega</div>
+        <DebugToolbar dispatch={this.props.dispatch} />
       </div>
     );
   }
+  switchToEditor = () => {
+    this.props.dispatch(switchToEditorAction());
+  };
 }

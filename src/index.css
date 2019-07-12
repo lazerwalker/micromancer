@@ -222,3 +222,13 @@ button {
 #numkey-0 {
   width: 100px;
 }
+
+button#show-debug {
+  background-color: #fffdd0;
+  color: brown;
+  float: left;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: 30px;
+  width: 80px;
+}

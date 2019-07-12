@@ -1,6 +1,13 @@
 .debug #logo {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 10px;
+  margin-top: 0;
+}
+
+button#show-editor {
+  background-color: #fffdd0;
+  color: brown;
+  float: left;
+  height: 40px;
+  margin-top: 0px;
+  margin-left: 30px;
+  width: 80px;
 }

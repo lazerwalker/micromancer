@@ -13,6 +13,13 @@ export interface State {
   debugTicks: number;
   debugStartPositions?: number[];
   nextPC: number;
+
+  uiMode: UIMode;
+}
+
+export enum UIMode {
+  Debug,
+  Editor
 }
 
 export const initialState = (props?: Partial<State>): State => {
@@ -28,6 +35,7 @@ export const initialState = (props?: Partial<State>): State => {
     isPlaying: false,
     debugTicks: 0,
     nextPC: 0,
+    uiMode: UIMode.Editor,
     ...props
   };
 };

@@ -1,11 +1,12 @@
 import React, { Reducer } from "react";
 import "./App.css";
 import { Dispatch, createReducerAndState } from "./reducer";
-import { State } from "./State";
+import { State, UIMode } from "./State";
 import { Action, debugNextAction } from "./Action";
 // import { EditorView } from "./components/EditorView";
 import { DebugView } from "./components/DebugView";
 import { parse } from "corewars-js";
+import { EditorView } from "./components/EditorView";
 
 // const program = "MOV 0, 1";
 
@@ -90,20 +91,28 @@ class App extends React.Component<{}, State> {
   }
 
   render() {
-    return (
-      // <EditorView
-      //   dispatch={this.dispatch}
-      //   code={this.state.code}
-      //   cursor={this.state.cursor}
-      // />
-      <DebugView
-        code={this.state.code}
-        dispatch={this.dispatch}
-        memory={this.state.memory}
-        warriors={this.state.warriors}
-        nextPC={this.state.nextPC}
-      />
-    );
+    if (this.state.uiMode === UIMode.Editor) {
+      return (
+        <EditorView
+          dispatch={this.dispatch}
+          code={this.state.code}
+          cursor={this.state.cursor}
+        />
+      );
+    } else if (this.state.uiMode === UIMode.Debug) {
+      return (
+        <DebugView
+          code={this.state.code}
+          dispatch={this.dispatch}
+          memory={this.state.memory}
+          warriors={this.state.warriors}
+          nextPC={this.state.nextPC}
+        />
+      );
+    } else {
+      console.log(`Unknown UI mode: ${this.state.uiMode}`);
+      return <div />;
+    }
   }
 
   dispatch: Dispatch = (action: Action<any>) => {

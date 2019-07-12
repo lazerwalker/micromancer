@@ -1,4 +1,4 @@
-import { State, initialState, codeStringToCode } from "./State";
+import { State, initialState, codeStringToCode, UIMode } from "./State";
 import { Action, ActionType } from "./Action";
 import _ from "lodash";
 import { Reducer } from "react";
@@ -183,6 +183,12 @@ export function createReducerAndState(
     } else if (action.type === ActionType.DebugFast) {
       newState.isPlaying = true;
       newState.playRate = 5;
+      return newState;
+    } else if (action.type === ActionType.SwitchToDebug) {
+      newState.uiMode = UIMode.Debug;
+      return newState;
+    } else if (action.type === ActionType.SwitchToEditor) {
+      newState.uiMode = UIMode.Editor;
       return newState;
     }
 

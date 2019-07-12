@@ -13,7 +13,8 @@ import {
   typeOperandModeAction,
   typeOperandLabelAction,
   nextWordAction,
-  backspaceAction
+  backspaceAction,
+  switchToDebugAction
 } from "../Action";
 import { addressingModeValue } from "../types";
 import { CursorPosition } from "../State";
@@ -61,11 +62,18 @@ export class EditorView extends React.Component<Props, {}> {
           onLineClick={this.clickLine}
           onTokenClick={this.clickToken}
         />
+        <button onClick={this.switchToDebug} id="show-debug">
+          debug
+        </button>
         <div id="logo">omega</div>
         {keyboard}
       </div>
     );
   }
+
+  switchToDebug = () => {
+    this.props.dispatch(switchToDebugAction());
+  };
 
   clickLine = (line: number) => {
     if (line === this.props.cursor.line) {

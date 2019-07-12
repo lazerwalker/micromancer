@@ -15,7 +15,10 @@ export enum ActionType {
   DebugPause,
   DebugNext,
   DebugPlay,
-  DebugFast
+  DebugFast,
+
+  SwitchToDebug,
+  SwitchToEditor
 }
 
 export interface Action<T> {
@@ -113,6 +116,20 @@ export const debugNextAction = (): Action<undefined> => {
 export const debugFastAction = (): Action<undefined> => {
   return {
     type: ActionType.DebugFast,
+    value: undefined
+  };
+};
+
+export const switchToDebugAction = (): Action<undefined> => {
+  return {
+    type: ActionType.SwitchToDebug,
+    value: undefined
+  };
+};
+
+export const switchToEditorAction = (): Action<undefined> => {
+  return {
+    type: ActionType.SwitchToEditor,
     value: undefined
   };
 };
