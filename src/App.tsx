@@ -101,6 +101,7 @@ class App extends React.Component<{}, State> {
         dispatch={this.dispatch}
         memory={this.state.memory}
         warriors={this.state.warriors}
+        nextPC={this.state.nextPC}
       />
     );
   }

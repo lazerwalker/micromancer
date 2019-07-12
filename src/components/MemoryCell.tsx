@@ -11,16 +11,18 @@ interface Props {
   instruction: Instruction;
   owner?: number;
   isPC: boolean;
+  isNext: boolean;
 }
 
 export function MemoryCell(props: Props) {
-  const { owner, isPC, instruction } = props;
+  const { owner, isPC, isNext, instruction } = props;
 
   const classes = classNames({
     "memory-cell": true,
     "warrior-1": owner === 0,
     "warrior-2": owner === 1,
-    pc: isPC
+    pc: isPC,
+    next: isNext
   });
 
   let strings = [

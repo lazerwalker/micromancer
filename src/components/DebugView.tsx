@@ -12,13 +12,18 @@ interface Props {
   dispatch: Dispatch;
   memory: Instruction[];
   warriors: Warrior[];
+  nextPC: number;
 }
 
 export class DebugView extends React.Component<Props, {}> {
   render() {
     return (
       <div className="debug">
-        <MemoryView memory={this.props.memory} warriors={this.props.warriors} />
+        <MemoryView
+          memory={this.props.memory}
+          warriors={this.props.warriors}
+          nextPC={this.props.nextPC}
+        />
         <DebugToolbar dispatch={this.props.dispatch} />
         <div id="logo">omega</div>
       </div>

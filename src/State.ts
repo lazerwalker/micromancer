@@ -12,6 +12,7 @@ export interface State {
   playRate?: number;
   debugTicks: number;
   debugStartPositions?: number[];
+  nextPC: number;
 }
 
 export const initialState = (props?: Partial<State>): State => {
@@ -26,6 +27,7 @@ export const initialState = (props?: Partial<State>): State => {
     warriors: [],
     isPlaying: false,
     debugTicks: 0,
+    nextPC: 0,
     ...props
   };
 };

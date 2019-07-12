@@ -22,7 +22,8 @@ export function createReducerAndState(
     code: codeStringToCode(code),
     memory: vm.memory,
     warriors: vm.warriors,
-    debugStartPositions: vm.warriors.map(w => w.pc[0])
+    debugStartPositions: vm.warriors.map(w => w.pc[0]),
+    nextPC: vm.warriors[0].pc[0]
   });
 
   console.log(vm.equs);
@@ -140,13 +141,17 @@ export function createReducerAndState(
         undefined,
         newState.debugStartPositions
       );
+
+      let nextPC: number = 0;
       for (let i = 0; i < state.debugTicks - 1; i++) {
-        vm.tick();
+        nextPC = vm.tick() || nextPC;
       }
+
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
       newState.winner = undefined;
       newState.debugTicks = state.debugTicks - 1;
+      newState.nextPC = nextPC;
       return newState;
     } else if (action.type === ActionType.DebugPause) {
       newState.isPlaying = false;
@@ -163,6 +168,7 @@ export function createReducerAndState(
         newState.isPlaying = false;
         alert(`Player ${newState.winner + 1} won!`);
       } else {
+        newState.nextPC = result;
         console.log(vm.print());
       }
 
