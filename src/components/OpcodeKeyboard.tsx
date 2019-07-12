@@ -42,7 +42,7 @@ export default function(props: Props) {
     <div className="opcode keyboard">
       <div className="opcodes">{rows}</div>
       <button key="next" id="next-key" onClick={props.onNext}>
-        next
+        space
       </button>
       <button key="backspace" id="backspace-key" onClick={props.onBackspace}>
         del

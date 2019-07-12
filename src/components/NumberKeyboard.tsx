@@ -6,6 +6,7 @@ interface Props {
   onKeyPress: (number: string) => void;
   onNext: () => void;
   onBackspace: () => void;
+  isEndOfLine: boolean;
 }
 
 export default function(props: Props) {
@@ -62,7 +63,7 @@ export default function(props: Props) {
         disabled={!props.canNext}
         onClick={() => props.onNext()}
       >
-        next
+        {props.isEndOfLine ? "return" : ","}
       </button>
       <button
         key="backspace"

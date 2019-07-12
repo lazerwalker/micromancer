@@ -49,6 +49,7 @@ export class EditorView extends React.Component<Props, {}> {
           onNext={this.next}
           canAddAddressingMode={_.isUndefined(token) || token.length === 0}
           canNext={currentOperandIsValid(this.props)}
+          isEndOfLine={cursor.token === 2}
         />
       );
     }
