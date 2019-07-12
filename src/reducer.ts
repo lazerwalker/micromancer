@@ -1,8 +1,14 @@
-import { State, initialState, codeStringToCode, UIMode } from "./State";
-import { Action, ActionType } from "./Action";
+import {
+  State,
+  initialState,
+  codeStringToCode,
+  UIMode,
+  codeToString
+} from "./State";
+import { Action, ActionType, debugRestartAction } from "./Action";
 import _ from "lodash";
 import { Reducer } from "react";
-import { Instruction, VM } from "corewars-js";
+import { Instruction, VM, parse } from "corewars-js";
 
 export type Dispatch = (action: Action<any>) => void;
 
@@ -12,14 +18,26 @@ interface ReducerAndState {
 }
 
 export function createReducerAndState(
-  programs: Instruction[][],
-  code: string,
+  rawCode: string,
+  enemyCode: string,
   size: number = 80
 ): ReducerAndState {
+  // TODO: Should this live in State instead of this closure?
+  let programs: Instruction[][] = [];
+
+  const generatePrograms = (playerCode: string) => {
+    console.log(playerCode);
+    console.log("---");
+    console.log(enemyCode);
+    programs = [playerCode, enemyCode].map(parse);
+  };
+
+  generatePrograms(rawCode);
+
   let vm = new VM(_.cloneDeep(programs), size);
 
   const s = initialState({
-    code: codeStringToCode(code),
+    code: codeStringToCode(rawCode),
     memory: vm.memory,
     warriors: vm.warriors,
     debugStartPositions: vm.warriors.map(w => w.pc[0]),
@@ -202,8 +220,9 @@ export function createReducerAndState(
       newState.playRate = 5;
       return newState;
     } else if (action.type === ActionType.SwitchToDebug) {
+      generatePrograms(codeToString(state.code));
       newState.uiMode = UIMode.Debug;
-      return newState;
+      return reducer(newState, debugRestartAction());
     } else if (action.type === ActionType.SwitchToEditor) {
       newState.uiMode = UIMode.Editor;
       return newState;

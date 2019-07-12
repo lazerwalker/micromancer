@@ -66,8 +66,7 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-    const programs = [vampire, bomb].map(parse);
-    const { state, reducer } = createReducerAndState(programs, bomb);
+    const { state, reducer } = createReducerAndState(bomb, vampire);
     this.state = state;
     this.reducer = reducer;
   }

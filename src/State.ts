@@ -5,6 +5,7 @@ export interface State {
   code: Line[];
   cursor: CursorPosition;
   memory: Instruction[];
+
   warriors: Warrior[];
 
   isPlaying: boolean;
@@ -48,4 +49,8 @@ export interface CursorPosition {
 
 export function codeStringToCode(str: string): Line[] {
   return str.split("\n").map(l => l.split(" "));
+}
+
+export function codeToString(code: Line[]): string {
+  return code.map(l => l.join(" ")).join("\n");
 }
