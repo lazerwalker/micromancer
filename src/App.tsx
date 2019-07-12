@@ -23,7 +23,22 @@ import { parse } from "corewars-js";
 // JMP trap
 // bomb DAT #0`;
 
-const program = `ADD #4, 3
+const vampire = `const EQU 2365
+loc   MOV ptr, ptr     ; throw JMP pointer to core
+      ADD #const, ptr  ; update pointer
+      SUB #const, loc  ; update location
+      JMP loc          ; loop back
+
+ptr   JMP @0, trap     ; the pointer weapon
+
+trap  SPL 1, -100      ; this is where the pointer points to
+      MOV bomb, <-1    ; core-clear
+      JMP trap
+bomb  DAT #0`;
+
+// const imp = "MOV 0, 1";
+
+const bomb = `ADD #4, 3
 MOV 2, @2
 JMP -2
 DAT #0, #0`;
@@ -50,8 +65,8 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-    const programs = [parse(program)];
-    const { state, reducer } = createReducerAndState(programs, program);
+    const programs = [vampire, bomb].map(parse);
+    const { state, reducer } = createReducerAndState(programs, bomb);
     this.state = state;
     this.reducer = reducer;
   }
