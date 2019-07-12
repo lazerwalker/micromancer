@@ -16,6 +16,8 @@ interface Props {
 
 export default function(props: Props) {
   const codeLines = props.code.map((l, i) => {
+    const lineSelected = i === props.currentLine && props.currentToken === -1;
+
     const tokens = l.map((t, ti) => {
       const selected = i === props.currentLine && ti === props.currentToken;
       const tokenClasses = classNames("token", {
@@ -30,7 +32,7 @@ export default function(props: Props) {
       const style: React.CSSProperties = {};
       style.color = Bim.bold.color1;
 
-      if (selected) {
+      if (selected || lineSelected) {
         style.backgroundColor = Bim.fgColor;
         style.color = Bim.bgColor;
       }
@@ -60,7 +62,7 @@ export default function(props: Props) {
         key={`line-${i}`}
         onClick={() => props.onLineClick && props.onLineClick(i)}
         style={{
-          backgroundColor: Bim.bgColor,
+          backgroundColor: lineSelected ? Bim.fgColor : Bim.bgColor,
           color: Bim.fgColor
         }}
       >

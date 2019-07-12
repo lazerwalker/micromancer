@@ -30,10 +30,8 @@ export class EditorView extends React.Component<Props, {}> {
   render() {
     const { cursor, code } = this.props;
 
-    const token = code[cursor.line][cursor.token];
-
     let keyboard;
-    if (cursor.token === 0) {
+    if (cursor.token === 0 || cursor.token === -1) {
       keyboard = (
         <OpcodeKeyboard
           onKeyPress={this.typeOpcode}
@@ -77,10 +75,7 @@ export class EditorView extends React.Component<Props, {}> {
   };
 
   clickLine = (line: number) => {
-    if (line === this.props.cursor.line) {
-      return;
-    }
-    this.props.dispatch(setCursorAction(line, 0));
+    this.props.dispatch(setCursorAction(line, -1));
   };
 
   clickToken = (line: number, token: number) => {

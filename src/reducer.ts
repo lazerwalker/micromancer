@@ -32,18 +32,19 @@ export function createReducerAndState(
     const newState = _.cloneDeep(state);
 
     const { cursor, code } = newState;
-    const line = newState.code[cursor.line] || [];
+    const line = code[cursor.line] || [];
 
     if (action.type === ActionType.TypeOpcode) {
-      if (cursor.token !== 0) {
+      if (cursor.token > 0) {
         return state;
       }
 
-      if (!code[cursor.line]) {
-        code[cursor.line] = line;
+      if (cursor.token === -1) {
+        newState.code[cursor.line] = [action.value];
+      } else {
+        line[0] = action.value;
       }
 
-      line[0] = action.value;
       cursor.token = 1;
       cursor.isMidOperand = false;
 
