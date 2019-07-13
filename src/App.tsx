@@ -3,9 +3,7 @@ import "./App.css";
 import { Dispatch, createReducerAndState } from "./reducer";
 import { State, UIMode } from "./State";
 import { Action, debugNextAction } from "./Action";
-// import { EditorView } from "./components/EditorView";
 import { DebugView } from "./components/DebugView";
-import { parse } from "corewars-js";
 import { EditorView } from "./components/EditorView";
 
 // const program = "MOV 0, 1";
@@ -25,17 +23,15 @@ import { EditorView } from "./components/EditorView";
 // bomb DAT #0`;
 
 const vampire = `const EQU 2365
-loc   MOV ptr, ptr     ; throw JMP pointer to core
-      ADD #const, ptr  ; update pointer
-      SUB #const, loc  ; update location
-      JMP loc          ; loop back
-
-ptr   JMP @0, trap     ; the pointer weapon
-
-trap  SPL 1, -100      ; this is where the pointer points to
-      MOV bomb, <-1    ; core-clear
-      JMP trap
-bomb  DAT #0`;
+loc MOV ptr, ptr
+ADD #const, ptr
+SUB #const, loc
+JMP loc
+ptr JMP @0, trap
+trap SPL 1, -100
+MOV bomb, <-1
+JMP trap
+bomb DAT #0`;
 
 // const imp = "MOV 0, 1";
 
@@ -94,8 +90,9 @@ class App extends React.Component<{}, State> {
       return (
         <EditorView
           dispatch={this.dispatch}
-          code={this.state.code}
+          code={this.state.editingCode}
           cursor={this.state.cursor}
+          isOwnCode={this.state.viewingOwnCode}
         />
       );
     } else if (this.state.uiMode === UIMode.Debug) {

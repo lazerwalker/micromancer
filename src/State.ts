@@ -16,6 +16,10 @@ export interface State {
   nextPC: number;
 
   uiMode: UIMode;
+
+  /** If false, show the other code */
+  editingCode: Line[];
+  viewingOwnCode: boolean;
 }
 
 export enum UIMode {
@@ -37,6 +41,8 @@ export const initialState = (props?: Partial<State>): State => {
     debugTicks: 0,
     nextPC: 0,
     uiMode: UIMode.Editor,
+    editingCode: [],
+    viewingOwnCode: true,
     ...props
   };
 };

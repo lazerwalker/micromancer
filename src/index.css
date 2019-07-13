@@ -232,3 +232,13 @@ button#show-debug {
   margin-left: 30px;
   width: 80px;
 }
+
+button#show-other {
+  background-color: brown;
+  color: #fffdd0;
+  float: left;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: 5px;
+  width: 80px;
+}

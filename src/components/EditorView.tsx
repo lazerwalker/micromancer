@@ -14,7 +14,8 @@ import {
   typeOperandLabelAction,
   nextWordAction,
   backspaceAction,
-  switchToDebugAction
+  switchToDebugAction,
+  toggleWhoseCodeAction
 } from "../Action";
 import { addressingModeValue } from "../types";
 import { CursorPosition } from "../State";
@@ -24,11 +25,12 @@ interface Props {
   cursor: CursorPosition;
   code: Line[];
   dispatch: Dispatch;
+  isOwnCode: boolean;
 }
 
 export class EditorView extends React.Component<Props, {}> {
   render() {
-    const { cursor, code } = this.props;
+    const { cursor, code, isOwnCode } = this.props;
 
     let keyboard;
     if (cursor.token === 0 || cursor.token === -1) {
@@ -52,6 +54,8 @@ export class EditorView extends React.Component<Props, {}> {
       );
     }
 
+    const otherLabel = isOwnCode ? "enemy code" : "my code";
+
     return (
       <div className="editor">
         <CodeView
@@ -64,14 +68,21 @@ export class EditorView extends React.Component<Props, {}> {
         <button onClick={this.switchToDebug} id="show-debug">
           debug
         </button>
+        <button onClick={this.showOtherCode} id="show-other">
+          {otherLabel}
+        </button>
         <div id="logo">omega</div>
-        {keyboard}
+        {isOwnCode ? keyboard : undefined}
       </div>
     );
   }
 
   switchToDebug = () => {
     this.props.dispatch(switchToDebugAction());
+  };
+
+  showOtherCode = () => {
+    this.props.dispatch(toggleWhoseCodeAction());
   };
 
   clickLine = (line: number) => {

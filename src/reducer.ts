@@ -36,8 +36,13 @@ export function createReducerAndState(
 
   let vm = new VM(_.cloneDeep(programs), size);
 
+  const code = codeStringToCode(rawCode);
+  const otherCode = codeStringToCode(enemyCode);
+
   const s = initialState({
-    code: codeStringToCode(rawCode),
+    code,
+    editingCode: code,
+    viewingOwnCode: true,
     memory: vm.memory,
     warriors: vm.warriors,
     debugStartPositions: vm.warriors.map(w => w.pc[0]),
@@ -225,6 +230,15 @@ export function createReducerAndState(
       return reducer(newState, debugRestartAction());
     } else if (action.type === ActionType.SwitchToEditor) {
       newState.uiMode = UIMode.Editor;
+      return newState;
+    } else if (action.type === ActionType.ToggleWhoseCode) {
+      if (newState.viewingOwnCode) {
+        newState.editingCode = otherCode;
+      } else {
+        newState.editingCode = newState.code;
+      }
+
+      newState.viewingOwnCode = !newState.viewingOwnCode;
       return newState;
     }
 

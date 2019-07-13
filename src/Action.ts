@@ -18,7 +18,8 @@ export enum ActionType {
   DebugFast,
 
   SwitchToDebug,
-  SwitchToEditor
+  SwitchToEditor,
+  ToggleWhoseCode
 }
 
 export interface Action<T> {
@@ -130,6 +131,13 @@ export const switchToDebugAction = (): Action<undefined> => {
 export const switchToEditorAction = (): Action<undefined> => {
   return {
     type: ActionType.SwitchToEditor,
+    value: undefined
+  };
+};
+
+export const toggleWhoseCodeAction = (): Action<undefined> => {
+  return {
+    type: ActionType.ToggleWhoseCode,
     value: undefined
   };
 };
