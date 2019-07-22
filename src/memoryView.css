@@ -21,18 +21,23 @@
   height: 10vw;
 }
 
-.memory-cell.warrior-1 {
+.memory-cell.warrior-2 {
   background-color: brown;
 }
 
-.memory-cell.warrior-2 {
+.memory-cell.warrior-2.pc {
   background-color: orangered;
 }
 
-.memory-cell.pc {
-  background-color: goldenrod;
+.memory-cell.warrior-1 {
+  background-color: green;
+}
+
+.memory-cell.warrior-1.pc {
+  color: black;
+  background-color: aquamarine;
 }
 
 .memory-cell.pc.next {
-  background-color: lightskyblue;
+  border: 4px solid white;
 }
