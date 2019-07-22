@@ -72,12 +72,6 @@ export default function(props: Props) {
         >
           {i - props.currentLine}
         </span>
-        <span
-          className="line-num absolute"
-          style={{ backgroundColor: Bim.bold.color1 }}
-        >
-          {i}
-        </span>
         <span className="code-instruction">{tokens}</span>
       </div>
     );
@@ -87,9 +81,9 @@ export default function(props: Props) {
       <div
         className="code-box crt"
         style={{
-          background: `linear-gradient(to right, ${Bim.bold.color1} 105px, ${
+          background: `linear-gradient(to right, ${Bim.bold.color1} 40px, ${
             Bim.bgColor
-          } 100px)`
+          } 40px)`
         }}
       >
         {codeLines}
