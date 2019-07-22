@@ -211,14 +211,17 @@ export function createReducerAndState(
         const youWon = newState.winner === 0;
         const text = youWon ? "You won!" : "You lost.";
         alert(text);
-      } else {
-        newState.nextPC = result;
-        console.log(vm.print());
+
+        return newState;
       }
+
+      newState.nextPC = result;
+      console.log(vm.print());
 
       newState.debugTicks += 1;
       newState.memory = vm.memory;
       newState.warriors = vm.warriors;
+
       return newState;
     } else if (action.type === ActionType.DebugPlay) {
       newState.isPlaying = true;
