@@ -121,6 +121,7 @@ export function createReducerAndState(
 
       if (line[cursor.token]) {
         if (cursor.token === 1) {
+          line[cursor.token] += ",";
           cursor.token = 2;
           return newState;
         } else if (cursor.token === 2) {
