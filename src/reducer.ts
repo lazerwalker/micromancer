@@ -207,7 +207,10 @@ export function createReducerAndState(
       if (_.isUndefined(result)) {
         newState.winner = _.indexOf(vm.warriors, vm.winner());
         newState.isPlaying = false;
-        alert(`Player ${newState.winner + 1} won!`);
+
+        const youWon = newState.winner === 0;
+        const text = youWon ? "You won!" : "You lost.";
+        alert(text);
       } else {
         newState.nextPC = result;
         console.log(vm.print());
