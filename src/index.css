@@ -233,6 +233,11 @@ button#show-debug {
   width: 80px;
 }
 
+button#show-debug.disabled {
+  background-color: #888;
+  color: #bbb;
+}
+
 button#show-other {
   background-color: brown;
   color: #fffdd0;

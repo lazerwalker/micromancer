@@ -56,6 +56,8 @@ export class EditorView extends React.Component<Props, {}> {
 
     const otherLabel = isOwnCode ? "enemy code" : "my code";
 
+    const valid = this.codeIsValid();
+
     return (
       <div className="editor">
         <CodeView
@@ -65,7 +67,11 @@ export class EditorView extends React.Component<Props, {}> {
           onLineClick={this.clickLine}
           onTokenClick={this.clickToken}
         />
-        <button onClick={this.switchToDebug} id="show-debug">
+        <button
+          onClick={this.switchToDebug}
+          className={valid ? "" : "disabled"}
+          id="show-debug"
+        >
           debug
         </button>
         <button onClick={this.showOtherCode} id="show-other">
@@ -78,6 +84,7 @@ export class EditorView extends React.Component<Props, {}> {
   }
 
   switchToDebug = () => {
+    if (!this.codeIsValid()) return;
     this.props.dispatch(switchToDebugAction());
   };
 
@@ -123,5 +130,15 @@ export class EditorView extends React.Component<Props, {}> {
 
   didTypeBackspace = () => {
     this.props.dispatch(backspaceAction());
+  };
+
+  // TODO: This might get more complicated, should probably be extracted somewhere
+  codeIsValid = (): boolean => {
+    // Make sure there are no missing holes
+    const invalid = this.props.code.find(l => {
+      return (l.length > 0 && _.isUndefined(l[0])) || _.isUndefined(l[1]);
+    });
+    if (invalid) return false;
+    return true;
   };
 }
