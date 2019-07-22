@@ -239,6 +239,12 @@ export function createReducerAndState(
         newState.editingCode = newState.code;
       }
 
+      newState.cursor = {
+        line: 0,
+        token: 0,
+        isMidOperand: false
+      };
+
       newState.viewingOwnCode = !newState.viewingOwnCode;
       return newState;
     }
