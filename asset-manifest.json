@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/micromancer/static/css/main.459b8c49.chunk.css",
+    "main.js": "/micromancer/static/js/main.17c07d54.chunk.js",
+    "main.js.map": "/micromancer/static/js/main.17c07d54.chunk.js.map",
+    "runtime~main.js": "/micromancer/static/js/runtime~main.07f933db.js",
+    "runtime~main.js.map": "/micromancer/static/js/runtime~main.07f933db.js.map",
+    "static/js/2.b6a2c784.chunk.js": "/micromancer/static/js/2.b6a2c784.chunk.js",
+    "static/js/2.b6a2c784.chunk.js.map": "/micromancer/static/js/2.b6a2c784.chunk.js.map",
+    "index.html": "/micromancer/index.html",
+    "precache-manifest.9a914a93d0385ced17ccfadecfe7c734.js": "/micromancer/precache-manifest.9a914a93d0385ced17ccfadecfe7c734.js",
+    "service-worker.js": "/micromancer/service-worker.js",
+    "static/css/main.459b8c49.chunk.css.map": "/micromancer/static/css/main.459b8c49.chunk.css.map",
+    "static/media/index.css": "/micromancer/static/media/barcadenobar.292ff015.ttf"
+  }
+}
