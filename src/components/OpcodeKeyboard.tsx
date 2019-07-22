@@ -16,9 +16,12 @@ export default function(props: Props) {
     );
   };
 
+  let currentSpacer = 0;
+
   const makeOpcodeButton = (o: string) => {
     if (o === "spacer") {
-      return <div className="spacer" key="spacer" />;
+      currentSpacer += 1;
+      return <div className="spacer" key={`spacer-${currentSpacer}`} />;
     }
 
     return (
