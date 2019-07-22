@@ -93,16 +93,15 @@ export function createReducerAndState(
       if (cursor.token !== 1 && cursor.token !== 2) {
         return state;
       }
-
       if (!line) return state;
 
       // TODO: This should probably be a discrete action
       if (action.value === "-" && !cursor.isMidOperand) {
-        cursor.isMidOperand = true;
         line[cursor.token] = action.value;
-      } else {
-        cursor.isMidOperand = false;
+        cursor.isMidOperand = true;
+      } else if (cursor.isMidOperand) {
         line[cursor.token] = (line[cursor.token] || "") + action.value;
+        cursor.isMidOperand = true;
       }
 
       return newState;
