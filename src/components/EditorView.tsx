@@ -108,7 +108,6 @@ export class EditorView extends React.Component<Props, {}> {
   typeDigitOrMode = (d: string) => {
     // '-' isn't an addressing mode, but our term 'mode' here is wrong
     // It really just means "a non-digit symbol that isn't a label or math that can be at the start of an operand"
-    const validModes = ["#", "@", ">", "-"];
     let action: Action<string>;
     if (parseInt(d, 10).toString() === d) {
       action = typeOperandDigitAction(parseInt(d));
