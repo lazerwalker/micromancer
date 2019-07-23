@@ -109,12 +109,41 @@ window.buildVersion = '\(bundleVersion)';
         }
 
         loadGameURL()
+
+        setUpServerGesture()
     }
 
-    private func loadGameURL() {
+    private func setUpServerGesture() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showServerSelector))
+        gestureRecognizer.numberOfTouchesRequired = 3
+        gestureRecognizer.numberOfTapsRequired = 2
+        webView?.addGestureRecognizer(gestureRecognizer)
+    }
+
+    @objc func showServerSelector() {
+        let alert = UIAlertController(title: "Select a server", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Web Prod", style: .default, handler: { (action) in
+            self.loadGameURL("https://lazerwalker.com/micromancer")
+            self.dismiss(animated: true, completion: nil)
+        }))
+
+        alert.addAction(UIAlertAction(title: "Ono-Sendai", style: .default, handler: { (action) in
+            self.loadGameURL("http://ono-sendai.local:3000")
+            self.dismiss(animated: true, completion: nil)
+        }))
+
+        alert.addAction(UIAlertAction(title: "Localhost", style: .default, handler: { (action) in
+            self.loadGameURL("http://localhost:3000")
+            self.dismiss(animated: true, completion: nil)
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func loadGameURL(_ urlString: String = "https://lazerwalker.com/micromancer") {
         guard let webView = self.webView else { return }
 
-        guard let url = (serverOverride != nil) ? serverOverride : URL(string: "https://lazerwalker.com/micromancer")
+        guard let url = URL(string: urlString)
             else { return }
 
         webView.load(URLRequest(url: url))
