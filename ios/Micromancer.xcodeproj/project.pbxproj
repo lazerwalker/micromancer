@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6067813322AC81F90036A5FC /* Fipps-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6067813222AC81F80036A5FC /* Fipps-Regular.otf */; };
+		60924F6D22BFF9F90004796A /* URLLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60924F6C22BFF9F90004796A /* URLLoader.swift */; };
+		60961B7022B6DEDC0070160A /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60961B6F22B6DEDC0070160A /* ShareManager.swift */; };
+		60CF33CD22D41ED8001E4760 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CF33CC22D41ED7001E4760 /* CoreGraphics.framework */; };
+		60CF33CF22D41EE1001E4760 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CF33CE22D41EE1001E4760 /* UIKit.framework */; };
+		C61E55C022DA979900010550 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61E55BF22DA979900010550 /* GameCenter.swift */; };
+		C61E55C722DB650A00010550 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61E55C622DB650A00010550 /* PushNotifications.swift */; };
+		C626522022AA9C1400720FE0 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626521F22AA9C1400720FE0 /* HapticManager.swift */; };
+		C626522222AA9CDD00720FE0 /* WebViewInteropProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626522122AA9CDD00720FE0 /* WebViewInteropProvider.swift */; };
+		C6309E4722AD1FFE00D0E0E1 /* AppStoreReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6309E4622AD1FFE00D0E0E1 /* AppStoreReviewer.swift */; };
+		C653149121EE7BB80068609E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C653149021EE7BB80068609E /* AppDelegate.swift */; };
+		C653149321EE7BB80068609E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C653149221EE7BB80068609E /* ViewController.swift */; };
+		C653149621EE7BB80068609E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C653149421EE7BB80068609E /* Main.storyboard */; };
+		C653149821EE7BBA0068609E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C653149721EE7BBA0068609E /* Assets.xcassets */; };
+		C653149B21EE7BBA0068609E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C653149921EE7BBA0068609E /* LaunchScreen.storyboard */; };
+		DDC7C743F8BED1CAD61A4742 /* Pods_FlappyRoyale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF76939EB3341111F5AB59A6 /* Pods_FlappyRoyale.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0000FB2B7EF3AE0F42AADF03 /* Pods_Flappy_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flappy_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		264E7274F9B9BF5130647ACC /* Pods-Flappy Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flappy Dev.release.xcconfig"; path = "Target Support Files/Pods-Flappy Dev/Pods-Flappy Dev.release.xcconfig"; sourceTree = "<group>"; };
+		2F3F98C88D6A309221A5D051 /* Pods-Flappy Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flappy Dev.debug.xcconfig"; path = "Target Support Files/Pods-Flappy Dev/Pods-Flappy Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		605A160B22B5AEDB008A7AFD /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		6067813222AC81F80036A5FC /* Fipps-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fipps-Regular.otf"; sourceTree = "<group>"; };
+		60924F6C22BFF9F90004796A /* URLLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLLoader.swift; sourceTree = "<group>"; };
+		60961B6F22B6DEDC0070160A /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
+		60CF33CC22D41ED7001E4760 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		60CF33CE22D41EE1001E4760 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6CD0CEBE8DE42AE61C6E36A5 /* Pods-FlappyRoyale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlappyRoyale.debug.xcconfig"; path = "Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale.debug.xcconfig"; sourceTree = "<group>"; };
+		6D1BFD9413EA68359D30A410 /* Pods-FlappyRoyale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlappyRoyale.release.xcconfig"; path = "Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale.release.xcconfig"; sourceTree = "<group>"; };
+		C61E55BF22DA979900010550 /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+		C61E55C622DB650A00010550 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
+		C626521F22AA9C1400720FE0 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		C626522122AA9CDD00720FE0 /* WebViewInteropProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewInteropProvider.swift; sourceTree = "<group>"; };
+		C6309E4622AD1FFE00D0E0E1 /* AppStoreReviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewer.swift; sourceTree = "<group>"; };
+		C653148D21EE7BB80068609E /* Micromancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Micromancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C653149021EE7BB80068609E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C653149221EE7BB80068609E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C653149521EE7BB80068609E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C653149721EE7BBA0068609E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C653149A21EE7BBA0068609E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C653149C21EE7BBA0068609E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF76939EB3341111F5AB59A6 /* Pods_FlappyRoyale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlappyRoyale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C653148A21EE7BB80068609E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60CF33CF22D41EE1001E4760 /* UIKit.framework in Frameworks */,
+				60CF33CD22D41ED8001E4760 /* CoreGraphics.framework in Frameworks */,
+				DDC7C743F8BED1CAD61A4742 /* Pods_FlappyRoyale.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B779176D50F295FF21F9411F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60CF33CE22D41EE1001E4760 /* UIKit.framework */,
+				60CF33CC22D41ED7001E4760 /* CoreGraphics.framework */,
+				EF76939EB3341111F5AB59A6 /* Pods_FlappyRoyale.framework */,
+				0000FB2B7EF3AE0F42AADF03 /* Pods_Flappy_Dev.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8CE5A8B137FCA8B62F8579A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6CD0CEBE8DE42AE61C6E36A5 /* Pods-FlappyRoyale.debug.xcconfig */,
+				6D1BFD9413EA68359D30A410 /* Pods-FlappyRoyale.release.xcconfig */,
+				2F3F98C88D6A309221A5D051 /* Pods-Flappy Dev.debug.xcconfig */,
+				264E7274F9B9BF5130647ACC /* Pods-Flappy Dev.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6309E4522AD1FE300D0E0E1 /* JS Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C626522122AA9CDD00720FE0 /* WebViewInteropProvider.swift */,
+				C626521F22AA9C1400720FE0 /* HapticManager.swift */,
+				C6309E4622AD1FFE00D0E0E1 /* AppStoreReviewer.swift */,
+				605A160B22B5AEDB008A7AFD /* AnalyticsManager.swift */,
+				60961B6F22B6DEDC0070160A /* ShareManager.swift */,
+				60924F6C22BFF9F90004796A /* URLLoader.swift */,
+				C61E55BF22DA979900010550 /* GameCenter.swift */,
+				C61E55C622DB650A00010550 /* PushNotifications.swift */,
+			);
+			path = "JS Extensions";
+			sourceTree = "<group>";
+		};
+		C653148421EE7BB80068609E = {
+			isa = PBXGroup;
+			children = (
+				C653148F21EE7BB80068609E /* Micromancer */,
+				C653148E21EE7BB80068609E /* Products */,
+				B8CE5A8B137FCA8B62F8579A /* Pods */,
+				B779176D50F295FF21F9411F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C653148E21EE7BB80068609E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C653148D21EE7BB80068609E /* Micromancer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C653148F21EE7BB80068609E /* Micromancer */ = {
+			isa = PBXGroup;
+			children = (
+				C6309E4522AD1FE300D0E0E1 /* JS Extensions */,
+				C653149021EE7BB80068609E /* AppDelegate.swift */,
+				C653149221EE7BB80068609E /* ViewController.swift */,
+				C653149421EE7BB80068609E /* Main.storyboard */,
+				6067813222AC81F80036A5FC /* Fipps-Regular.otf */,
+				C653149721EE7BBA0068609E /* Assets.xcassets */,
+				C653149921EE7BBA0068609E /* LaunchScreen.storyboard */,
+				C653149C21EE7BBA0068609E /* Info.plist */,
+			);
+			path = Micromancer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C653148C21EE7BB80068609E /* Micromancer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C653149F21EE7BBA0068609E /* Build configuration list for PBXNativeTarget "Micromancer" */;
+			buildPhases = (
+				94F0E94D9CE41A128868F26B /* [CP] Check Pods Manifest.lock */,
+				C653148921EE7BB80068609E /* Sources */,
+				C653148A21EE7BB80068609E /* Frameworks */,
+				C653148B21EE7BB80068609E /* Resources */,
+				3CFF67C04404CFF923592CC0 /* [CP] Embed Pods Frameworks */,
+				BAA3C04E02787677ED4F3717 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Micromancer;
+			productName = Gorli;
+			productReference = C653148D21EE7BB80068609E /* Micromancer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C653148521EE7BB80068609E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Mike Lazer-Walker";
+				TargetAttributes = {
+					C653148C21EE7BB80068609E = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = C653148821EE7BB80068609E /* Build configuration list for PBXProject "Micromancer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C653148421EE7BB80068609E;
+			productRefGroup = C653148E21EE7BB80068609E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C653148C21EE7BB80068609E /* Micromancer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C653148B21EE7BB80068609E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C653149B21EE7BBA0068609E /* LaunchScreen.storyboard in Resources */,
+				6067813322AC81F90036A5FC /* Fipps-Regular.otf in Resources */,
+				C653149821EE7BBA0068609E /* Assets.xcassets in Resources */,
+				C653149621EE7BB80068609E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CFF67C04404CFF923592CC0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94F0E94D9CE41A128868F26B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FlappyRoyale-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAA3C04E02787677ED4F3717 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale-resources.sh",
+				"${PODS_ROOT}/IronSourceTapjoyAdapter/ISTapjoyAdapter/Resources/TapjoyResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TapjoyResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlappyRoyale/Pods-FlappyRoyale-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C653148921EE7BB80068609E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C626522222AA9CDD00720FE0 /* WebViewInteropProvider.swift in Sources */,
+				60961B7022B6DEDC0070160A /* ShareManager.swift in Sources */,
+				60924F6D22BFF9F90004796A /* URLLoader.swift in Sources */,
+				C61E55C022DA979900010550 /* GameCenter.swift in Sources */,
+				C653149321EE7BB80068609E /* ViewController.swift in Sources */,
+				C61E55C722DB650A00010550 /* PushNotifications.swift in Sources */,
+				C6309E4722AD1FFE00D0E0E1 /* AppStoreReviewer.swift in Sources */,
+				C626522022AA9C1400720FE0 /* HapticManager.swift in Sources */,
+				C653149121EE7BB80068609E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C653149421EE7BB80068609E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C653149521EE7BB80068609E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C653149921EE7BBA0068609E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C653149A21EE7BBA0068609E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C653149D21EE7BBA0068609E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C653149E21EE7BBA0068609E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C65314A021EE7BBA0068609E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CD0CEBE8DE42AE61C6E36A5 /* Pods-FlappyRoyale.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 48WB56AE4K;
+				INFOPLIST_FILE = "${SRCROOT}/Micromancer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazerwalker.micromancer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		C65314A121EE7BBA0068609E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D1BFD9413EA68359D30A410 /* Pods-FlappyRoyale.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 48WB56AE4K;
+				INFOPLIST_FILE = "${SRCROOT}/Micromancer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazerwalker.micromancer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C653148821EE7BB80068609E /* Build configuration list for PBXProject "Micromancer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C653149D21EE7BBA0068609E /* Debug */,
+				C653149E21EE7BBA0068609E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C653149F21EE7BBA0068609E /* Build configuration list for PBXNativeTarget "Micromancer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C65314A021EE7BBA0068609E /* Debug */,
+				C65314A121EE7BBA0068609E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C653148521EE7BB80068609E /* Project object */;
+}

@@ -5,8 +5,6 @@ import WebKit
 class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate {
     let haptics = HapticManager()
     let storeReviews = AppStoreReviewer()
-    let adPresentor = AdPresentor()
-    let analytics = AnalyticsPresentor()
     let share = ShareManager()
     let urlOpener = URLManager()
     let gameCenterAuth = GameCenterAuth()
@@ -26,11 +24,9 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
 
     override func viewDidLoad() {
         
-        ISIntegrationHelper.validateIntegration()
 
         super.viewDidLoad()
 
-        adPresentor.presentationVC = self
         gameCenterAuth.presentationVC = self
 
         share.presentationVC = self
@@ -66,7 +62,7 @@ window.buildVersion = '\(bundleVersion)';
         }
 
 
-        let interopProviders: [WebViewInteropProvider] = [haptics, storeReviews, adPresentor, analytics, share, urlOpener, gameCenterAuth, pushNotifs]
+        let interopProviders: [WebViewInteropProvider] = [haptics, storeReviews, share, urlOpener, gameCenterAuth, pushNotifs]
         interopProviders.forEach({ $0.inject(userContentController) })
 
         let configuration = WKWebViewConfiguration()
@@ -88,30 +84,15 @@ window.buildVersion = '\(bundleVersion)';
         webView.navigationDelegate = self
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.delegate = self
-        webView.bounds = CGRect(x: 0, y: 0, width: 320, height: 240)
         view.addSubview(webView)
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             webView.topAnchor.constraint(equalTo: self.view.topAnchor),
             webView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
         ])
 
-        let adViewContainer = UIView()
-        view.addSubview(adViewContainer)
-        view.backgroundColor = view.backgroundColor
-        
-        adPresentor.startUpBannerIntoContainer(container: adViewContainer)
-
-        adViewContainer.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adViewContainer.heightAnchor.constraint(equalToConstant: 56),
-            adViewContainer.widthAnchor.constraint(equalToConstant: 320),
-            adViewContainer.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            adViewContainer.topAnchor.constraint(equalTo: webView.bottomAnchor),
-            adViewContainer.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-        ])
         
         self.webView = webView
         pushNotifs.webView = webView
@@ -133,7 +114,7 @@ window.buildVersion = '\(bundleVersion)';
     private func loadGameURL() {
         guard let webView = self.webView else { return }
 
-        guard let url = (serverOverride != nil) ? serverOverride : URL(string: "https://flappyroyale.io/prod")
+        guard let url = (serverOverride != nil) ? serverOverride : URL(string: "https://lazerwalker.com/micromancer")
             else { return }
 
         webView.load(URLRequest(url: url))
