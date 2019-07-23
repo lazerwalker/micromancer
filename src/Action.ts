@@ -12,8 +12,7 @@ export enum ActionType {
 
   DebugRestart,
   DebugUndo,
-  DebugPause,
-  DebugNext,
+  DebugPauseOrStep,
   DebugPlay,
   DebugFast,
 
@@ -93,9 +92,9 @@ export const debugUndoAction = (): Action<undefined> => {
   };
 };
 
-export const debugPauseAction = (): Action<undefined> => {
+export const debugPauseOrStepAction = (): Action<undefined> => {
   return {
-    type: ActionType.DebugPause,
+    type: ActionType.DebugPauseOrStep,
     value: undefined
   };
 };
@@ -103,13 +102,6 @@ export const debugPauseAction = (): Action<undefined> => {
 export const debugPlayAction = (): Action<undefined> => {
   return {
     type: ActionType.DebugPlay,
-    value: undefined
-  };
-};
-
-export const debugNextAction = (): Action<undefined> => {
-  return {
-    type: ActionType.DebugNext,
     value: undefined
   };
 };

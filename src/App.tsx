@@ -2,7 +2,7 @@ import React, { Reducer } from "react";
 import "./App.css";
 import { Dispatch, createReducerAndState } from "./reducer";
 import { State, UIMode } from "./State";
-import { Action, debugNextAction } from "./Action";
+import { Action, debugPauseOrStepAction } from "./Action";
 import { DebugView } from "./components/DebugView";
 import { EditorView } from "./components/EditorView";
 
@@ -62,7 +62,7 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-    const { state, reducer } = createReducerAndState(bomb, vampire);
+    const { state, reducer } = createReducerAndState("MOV 0, 1", vampire);
     this.state = state;
     this.reducer = reducer;
   }
@@ -70,7 +70,7 @@ class App extends React.Component<{}, State> {
   componentDidUpdate() {
     if (this.state.isPlaying && !this.timer) {
       const tick = () => {
-        this.dispatch(debugNextAction());
+        this.dispatch(debugPauseOrStepAction());
 
         if (this.state.isPlaying && this.state.playRate) {
           this.timer = (setTimeout(
@@ -103,6 +103,8 @@ class App extends React.Component<{}, State> {
           memory={this.state.memory}
           warriors={this.state.warriors}
           nextPC={this.state.nextPC}
+          isPaused={!this.state.isPlaying}
+          isAtStart={this.state.debugTicks === 0}
         />
       );
     } else {

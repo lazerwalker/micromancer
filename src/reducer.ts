@@ -167,11 +167,26 @@ export function createReducerAndState(
 
     // Debugger actions
     if (action.type === ActionType.DebugRestart) {
-      vm = new VM(_.cloneDeep(programs), size);
-      newState.memory = vm.memory;
-      newState.warriors = vm.warriors;
-      newState.debugTicks = 0;
-      newState.debugStartPositions = vm.warriors.map(w => w.pc[0]);
+      if (state.debugTicks === 0) {
+        vm = new VM(_.cloneDeep(programs), size);
+        newState.memory = vm.memory;
+        newState.warriors = vm.warriors;
+        newState.debugTicks = 0;
+        newState.debugStartPositions = vm.warriors.map(w => w.pc[0]);
+      } else {
+        vm = new VM(
+          _.cloneDeep(programs),
+          size,
+          undefined,
+          newState.debugStartPositions
+        );
+
+        newState.memory = vm.memory;
+        newState.warriors = vm.warriors;
+        newState.winner = undefined;
+        newState.debugTicks = 0;
+        newState.nextPC = 0;
+      }
 
       return newState;
     } else if (action.type === ActionType.DebugUndo) {
@@ -193,10 +208,12 @@ export function createReducerAndState(
       newState.debugTicks = state.debugTicks - 1;
       newState.nextPC = nextPC;
       return newState;
-    } else if (action.type === ActionType.DebugPause) {
-      newState.isPlaying = false;
-      return newState;
-    } else if (action.type === ActionType.DebugNext) {
+    } else if (action.type === ActionType.DebugPauseOrStep) {
+      if (newState.isPlaying) {
+        newState.isPlaying = false;
+        return newState;
+      }
+
       if (!_.isUndefined(state.winner)) {
         console.log("Can't continue, game is over");
         return state;

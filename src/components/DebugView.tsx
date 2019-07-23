@@ -14,6 +14,8 @@ interface Props {
   memory: Instruction[];
   warriors: Warrior[];
   nextPC: number;
+  isAtStart: boolean;
+  isPaused: boolean;
 }
 
 export class DebugView extends React.Component<Props, {}> {
@@ -29,7 +31,11 @@ export class DebugView extends React.Component<Props, {}> {
           edit
         </button>
         <div id="logo">omega</div>
-        <DebugToolbar dispatch={this.props.dispatch} />
+        <DebugToolbar
+          dispatch={this.props.dispatch}
+          isAtStart={this.props.isAtStart}
+          isPaused={this.props.isPaused}
+        />
       </div>
     );
   }

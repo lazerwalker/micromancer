@@ -3,8 +3,7 @@ import { Dispatch } from "../reducer";
 import {
   debugRestartAction,
   debugUndoAction,
-  debugPauseAction,
-  debugNextAction,
+  debugPauseOrStepAction,
   debugPlayAction,
   debugFastAction
 } from "../Action";
@@ -13,6 +12,8 @@ import "../debugToolbar.css";
 
 interface Props {
   dispatch: Dispatch;
+  isAtStart: boolean;
+  isPaused: boolean;
 }
 
 export class DebugToolbar extends React.Component<Props, {}> {
@@ -24,12 +25,15 @@ export class DebugToolbar extends React.Component<Props, {}> {
           textAlign: "center"
         }}
       >
-        <button onClick={this.restart}>{"<<<"}</button>
-        <button onClick={this.undo}>{"<"}</button>
-        <button onClick={this.pause}>||</button>
-        <button onClick={this.next}>></button>
-        <button onClick={this.play}>>></button>
-        <button onClick={this.fast}>>>></button>
+        <button onClick={this.restart}>
+          {this.props.isAtStart ? "Reset" : "Stop"}
+        </button>
+        <button onClick={this.undo}>Undo</button>
+        <button onClick={this.pauseOrStep}>
+          {this.props.isPaused ? "Step" : "Pause"}
+        </button>
+        <button onClick={this.play}>Run</button>
+        <button onClick={this.fast}>Fast</button>
       </div>
     );
   }
@@ -42,13 +46,8 @@ export class DebugToolbar extends React.Component<Props, {}> {
     this.props.dispatch(debugUndoAction());
   };
 
-  pause = () => {
-    this.props.dispatch(debugPauseAction());
-  };
-
-  next = () => {
-    console.log("In next", this);
-    this.props.dispatch(debugNextAction());
+  pauseOrStep = () => {
+    this.props.dispatch(debugPauseOrStepAction());
   };
 
   play = () => {
