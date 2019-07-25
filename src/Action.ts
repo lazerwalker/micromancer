@@ -15,6 +15,7 @@ export enum ActionType {
   DebugPauseOrStep,
   DebugPlay,
   DebugFast,
+  DebugTick,
 
   SwitchToDebug,
   SwitchToEditor,
@@ -102,6 +103,13 @@ export const debugPauseOrStepAction = (): Action<undefined> => {
 export const debugPlayAction = (): Action<undefined> => {
   return {
     type: ActionType.DebugPlay,
+    value: undefined
+  };
+};
+
+export const debugTickAction = (): Action<undefined> => {
+  return {
+    type: ActionType.DebugTick,
     value: undefined
   };
 };

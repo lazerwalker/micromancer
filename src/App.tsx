@@ -2,7 +2,7 @@ import React, { Reducer } from "react";
 import "./App.css";
 import { Dispatch, createReducerAndState } from "./reducer";
 import { State, UIMode } from "./State";
-import { Action, debugPauseOrStepAction } from "./Action";
+import { Action, debugTickAction } from "./Action";
 import { DebugView } from "./components/DebugView";
 import { EditorView } from "./components/EditorView";
 
@@ -70,7 +70,7 @@ class App extends React.Component<{}, State> {
   componentDidUpdate() {
     if (this.state.isPlaying && !this.timer) {
       const tick = () => {
-        this.dispatch(debugPauseOrStepAction());
+        this.dispatch(debugTickAction());
 
         if (this.state.isPlaying && this.state.playRate) {
           this.timer = (setTimeout(

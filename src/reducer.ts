@@ -163,6 +163,8 @@ export function createReducerAndState(
 
     // Debugger actions
     if (action.type === ActionType.DebugRestart) {
+      newState.isPlaying = false;
+
       if (state.debugTicks === 0) {
         vm = new VM(_.cloneDeep(programs), size);
         newState.memory = vm.memory;
@@ -229,6 +231,36 @@ export function createReducerAndState(
 
       newState.nextPC = result;
       console.log(vm.print());
+
+      newState.debugTicks += 1;
+      newState.memory = vm.memory;
+      newState.warriors = vm.warriors;
+
+      return newState;
+    } else if (action.type === ActionType.DebugTick) {
+      if (!newState.isPlaying) {
+        return state;
+      }
+
+      if (!_.isUndefined(state.winner)) {
+        console.log("Can't continue, game is over");
+        return state;
+      }
+
+      const result = vm.tick();
+      if (_.isUndefined(result)) {
+        newState.winner = _.indexOf(vm.warriors, vm.winner());
+        newState.isPlaying = false;
+
+        const youWon = newState.winner === 0;
+        const text = youWon ? "You won!" : "You lost.";
+        alert(text);
+
+        return newState;
+      }
+
+      newState.nextPC = result;
+      // console.log(vm.print());
 
       newState.debugTicks += 1;
       newState.memory = vm.memory;
