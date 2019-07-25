@@ -1,0 +1,6 @@
+framework module Pods_Micromancer {
+  umbrella header "Pods-Micromancer-umbrella.h"
+
+  export *
+  module * { export * }
+}

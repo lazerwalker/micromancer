@@ -1,5 +1,4 @@
 import Foundation
-import FirebaseAnalytics
 import WebKit
 
 class ShareManager : NSObject, WebViewInteropProvider {

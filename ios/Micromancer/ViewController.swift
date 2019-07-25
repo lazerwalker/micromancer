@@ -2,14 +2,7 @@ import UIKit
 import SafariServices
 import WebKit
 
-class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate {
-    let haptics = HapticManager()
-    let storeReviews = AppStoreReviewer()
-    let share = ShareManager()
-    let urlOpener = URLManager()
-    let gameCenterAuth = GameCenterAuth()
-    let pushNotifs = PushNotificationManager()
-    
+class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate, UIGestureRecognizerDelegate {
     var webView: WKWebView?
 
     var serverOverride: URL? {
@@ -23,14 +16,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     }
 
     override func viewDidLoad() {
-        
-
         super.viewDidLoad()
 
-        gameCenterAuth.presentationVC = self
-
-        share.presentationVC = self
-        urlOpener.presentationVC = self
         view.backgroundColor = UIColor(red:0.19, green:0.09, blue:0.02, alpha:1.0)
 
         let userContentController = WKUserContentController()
@@ -62,8 +49,8 @@ window.buildVersion = '\(bundleVersion)';
         }
 
 
-        let interopProviders: [WebViewInteropProvider] = [haptics, storeReviews, share, urlOpener, gameCenterAuth, pushNotifs]
-        interopProviders.forEach({ $0.inject(userContentController) })
+//        let interopProviders: [WebViewInteropProvider] = [haptics, storeReviews, share, urlOpener, gameCenterAuth, pushNotifs]
+//        interopProviders.forEach({ $0.inject(userContentController) })
 
         let configuration = WKWebViewConfiguration()
 
@@ -95,7 +82,6 @@ window.buildVersion = '\(bundleVersion)';
 
         
         self.webView = webView
-        pushNotifs.webView = webView
 
         // WKWebViews don't dispatch visibilitychange events.
         // If we fake support for visibilitychange, pausing the Phaser game will Just Work™
@@ -114,13 +100,14 @@ window.buildVersion = '\(bundleVersion)';
     }
 
     private func setUpServerGesture() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showServerSelector))
-        gestureRecognizer.numberOfTouchesRequired = 3
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showServerSelector(_:)))
+        gestureRecognizer.numberOfTouchesRequired = 2
         gestureRecognizer.numberOfTapsRequired = 2
+        gestureRecognizer.delegate = self
         webView?.addGestureRecognizer(gestureRecognizer)
     }
 
-    @objc func showServerSelector() {
+    @objc func showServerSelector(_ recognizer: UITapGestureRecognizer) {
         let alert = UIAlertController(title: "Select a server", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Web Prod", style: .default, handler: { (action) in
             self.loadGameURL("https://lazerwalker.com/micromancer")
@@ -242,6 +229,12 @@ window.buildVersion = '\(bundleVersion)';
 
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+
+    // Gesture recognizer delegate
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
