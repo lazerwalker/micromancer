@@ -131,6 +131,10 @@ export function createReducerAndState(
             code.push([]);
           }
 
+          if (!code[cursor.line + 1]) {
+            code.push([]);
+          }
+
           return newState;
         }
       }

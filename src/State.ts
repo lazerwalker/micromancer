@@ -54,7 +54,7 @@ export interface CursorPosition {
 }
 
 export function codeStringToCode(str: string): Line[] {
-  return str.split("\n").map(l => l.split(" "));
+  return [...str.split("\n").map(l => l.split(" ")), []];
 }
 
 export function codeToString(code: Line[]): string {
