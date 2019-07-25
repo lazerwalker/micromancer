@@ -33,7 +33,7 @@ export class EditorView extends React.Component<Props, {}> {
     const { cursor, code, isOwnCode } = this.props;
 
     let keyboard;
-    if (cursor.token === 0 || cursor.token === -1) {
+    if (cursor.token === 0 || cursor.token === undefined) {
       keyboard = (
         <OpcodeKeyboard
           onKeyPress={this.typeOpcode}
