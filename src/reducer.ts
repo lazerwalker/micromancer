@@ -143,23 +143,19 @@ export function createReducerAndState(
 
       if (cursor.token === 0) {
         // Opcode
-        if (_.isUndefined(token)) {
-          if (cursor.line >= 0) {
-            cursor.line -= 1;
-            cursor.token = 2;
-          }
-        } else {
-          line[cursor.token] = undefined;
+        if (cursor.line > 0) {
+          cursor.line -= 1;
+          cursor.token = 2;
         }
+        line[cursor.token] = undefined;
         return newState;
       } else {
         // Operand
-        if (_.isUndefined(token)) {
-          cursor.token -= 1;
-        } else if (cursor.isMidOperand && token.length > 1) {
+        if (token && cursor.isMidOperand && token.length > 1) {
           line[cursor.token] = token.slice(0, token.length - 1);
         } else {
           line[cursor.token] = undefined;
+          cursor.token -= 1;
         }
         return newState;
       }
