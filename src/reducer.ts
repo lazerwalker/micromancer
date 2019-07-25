@@ -171,6 +171,7 @@ export function createReducerAndState(
         newState.warriors = vm.warriors;
         newState.debugTicks = 0;
         newState.debugStartPositions = vm.warriors.map(w => w.pc[0]);
+        newState.nextPC = vm.warriors[0].pc[0];
       } else {
         vm = new VM(
           _.cloneDeep(programs),
@@ -183,7 +184,7 @@ export function createReducerAndState(
         newState.warriors = vm.warriors;
         newState.winner = undefined;
         newState.debugTicks = 0;
-        newState.nextPC = 0;
+        newState.nextPC = vm.warriors[0].pc[0];
       }
 
       return newState;
