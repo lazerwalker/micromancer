@@ -49,7 +49,7 @@ export const initialState = (props?: Partial<State>): State => {
 
 export interface CursorPosition {
   line: number;
-  token: number;
+  token: number | undefined;
   isMidOperand: boolean;
 }
 

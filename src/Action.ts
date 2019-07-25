@@ -64,7 +64,7 @@ export const nextWordAction = (): Action<undefined> => {
 
 export const setCursorAction = (
   line: number,
-  token: number
+  token: number | undefined
 ): Action<CursorPosition> => {
   return {
     type: ActionType.SetCursor,

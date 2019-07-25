@@ -58,11 +58,11 @@ export function createReducerAndState(
     const line = code[cursor.line] || [];
 
     if (action.type === ActionType.TypeOpcode) {
-      if (cursor.token > 0) {
+      if (cursor.token !== undefined && cursor.token > 0) {
         return state;
       }
 
-      if (cursor.token === -1) {
+      if (cursor.token === undefined) {
         newState.code[cursor.line] = [action.value];
       } else {
         line[0] = action.value;
@@ -118,7 +118,16 @@ export function createReducerAndState(
     } else if (action.type === ActionType.NextWord) {
       cursor.isMidOperand = false;
 
-      if (line[cursor.token]) {
+      if (cursor.token === undefined) {
+        cursor.line = cursor.line + 1;
+        if (!code[cursor.line]) {
+          code.push([]);
+        }
+
+        if (!code[cursor.line + 1]) {
+          code.push([]);
+        }
+      } else if (line[cursor.token]) {
         if (cursor.token === 1) {
           line[cursor.token] += ",";
           cursor.token = 2;

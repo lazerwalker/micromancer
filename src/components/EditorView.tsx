@@ -93,7 +93,7 @@ export class EditorView extends React.Component<Props, {}> {
   };
 
   clickLine = (line: number) => {
-    this.props.dispatch(setCursorAction(line, -1));
+    this.props.dispatch(setCursorAction(line, undefined));
   };
 
   clickToken = (line: number, token: number) => {
