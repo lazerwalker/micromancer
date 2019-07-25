@@ -6,6 +6,10 @@ export function currentOperandIsValid(state: {
   code: Line[];
   cursor: CursorPosition;
 }): boolean {
+  if (state.cursor.token === undefined) {
+    return true;
+  }
+
   const operand = state.code[state.cursor.line][state.cursor.token];
   if (!operand) return false;
 

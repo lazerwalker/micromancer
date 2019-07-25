@@ -9,14 +9,15 @@ import "../crt.css";
 interface Props {
   code: Line[];
   currentLine: number;
-  currentToken: number;
+  currentToken?: number;
   onLineClick?: (line: number) => void;
   onTokenClick?: (line: number, token: number) => void;
 }
 
 export default function(props: Props) {
   const codeLines = props.code.map((l, i) => {
-    const lineSelected = i === props.currentLine && props.currentToken === -1;
+    const lineSelected =
+      i === props.currentLine && props.currentToken === undefined;
 
     const tokens = l.map((t, ti) => {
       const selected = i === props.currentLine && ti === props.currentToken;

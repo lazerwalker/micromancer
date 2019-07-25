@@ -127,6 +127,7 @@ export function createReducerAndState(
         if (!code[cursor.line + 1]) {
           code.push([]);
         }
+        return newState;
       } else if (line[cursor.token]) {
         if (cursor.token === 1) {
           line[cursor.token] += ",";
@@ -152,6 +153,14 @@ export function createReducerAndState(
       newState.cursor = action.value;
       return newState;
     } else if (action.type === ActionType.Backspace) {
+      if (cursor.token === undefined) {
+        newState.code.splice(cursor.line, 1);
+        if (cursor.line > 0) {
+          cursor.line -= 1;
+        }
+        return newState;
+      }
+
       const token = line[cursor.token];
 
       if (cursor.token === 0) {
