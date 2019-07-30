@@ -190,6 +190,15 @@ button {
   padding: 3px 10px 3px 10px;
 }
 
+.token.label {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.token.label.empty {
+  padding-left: 20px !important;
+}
+
 .token.empty {
   /* border: 1px solid red; */
   padding-left: 35px;
