@@ -22,11 +22,12 @@ export default function(props: Props) {
     const tokens = l.map((t, ti) => {
       const selected = i === props.currentLine && ti === props.currentToken;
       const tokenClasses = classNames("token", {
-        opcode: ti === 0,
-        "operand-1": ti === 1,
-        "operand-2": ti === 2,
+        label: ti === 0,
+        opcode: ti === 1,
+        "operand-1": ti === 2,
+        "operand-2": ti === 3,
         selected,
-        operand: ti !== 0,
+        operand: ti > 1,
         empty: _.isUndefined(t)
       });
 

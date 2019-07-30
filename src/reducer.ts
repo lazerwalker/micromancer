@@ -3,7 +3,8 @@ import {
   initialState,
   codeStringToCode,
   UIMode,
-  codeToString
+  codeToString,
+  Token
 } from "./State";
 import { Action, ActionType, debugRestartAction } from "./Action";
 import _ from "lodash";
@@ -58,14 +59,14 @@ export function createReducerAndState(
     const line = code[cursor.line] || [];
 
     if (action.type === ActionType.TypeOpcode) {
-      if (cursor.token !== undefined && cursor.token > 0) {
+      if (cursor.token !== Token.Operand1 && cursor.token !== Token.Operand2) {
         return state;
       }
 
       if (cursor.token === undefined) {
         newState.code[cursor.line] = [action.value];
       } else {
-        line[0] = action.value;
+        line[Token.Opcode] = action.value;
       }
 
       cursor.token = 1;
@@ -73,7 +74,7 @@ export function createReducerAndState(
 
       return newState;
     } else if (action.type === ActionType.TypeOperandDigit) {
-      if (cursor.token !== 1 && cursor.token !== 2) {
+      if (cursor.token !== Token.Operand1 && cursor.token !== Token.Operand2) {
         return state;
       }
 
@@ -90,23 +91,30 @@ export function createReducerAndState(
 
       return newState;
     } else if (action.type === ActionType.TypeOperandLabel) {
-      if (cursor.token !== 1 && cursor.token !== 2) {
+      if (cursor.token === undefined) {
         return state;
       }
       if (!line) return state;
 
-      // TODO: This should probably be a discrete action
-      if (action.value === "-" && !cursor.isMidOperand) {
-        line[cursor.token] = action.value;
-        cursor.isMidOperand = true;
-      } else if (cursor.isMidOperand) {
-        line[cursor.token] = (line[cursor.token] || "") + action.value;
-        cursor.isMidOperand = true;
+      if (cursor.token === Token.Label || cursor.token === Token.Opcode) {
+        line[Token.Label] = action.value;
+      } else {
+        // TODO: This should probably be a discrete action
+        if (action.value === "-" && !cursor.isMidOperand) {
+          line[cursor.token] = action.value;
+          cursor.isMidOperand = true;
+        } else if (cursor.isMidOperand) {
+          line[cursor.token] = (line[cursor.token] || "") + action.value;
+          cursor.isMidOperand = true;
+        } else {
+          line[cursor.token] = action.value;
+          cursor.isMidOperand = true;
+        }
       }
 
       return newState;
     } else if (action.type === ActionType.TypeOperandMode) {
-      if (cursor.token !== 1 && cursor.token !== 2) {
+      if (cursor.token !== Token.Operand1 && cursor.token !== Token.Operand2) {
         return state;
       }
       if (!line) return state;
@@ -129,12 +137,12 @@ export function createReducerAndState(
         }
         return newState;
       } else if (line[cursor.token]) {
-        if (cursor.token === 1) {
+        if (cursor.token === Token.Operand1) {
           line[cursor.token] += ",";
-          cursor.token = 2;
+          cursor.token = Token.Operand2;
           return newState;
-        } else if (cursor.token === 2) {
-          cursor.token = 0;
+        } else if (cursor.token === Token.Operand2) {
+          cursor.token = Token.Opcode;
           cursor.line = cursor.line + 1;
 
           if (!code[cursor.line]) {
@@ -163,11 +171,12 @@ export function createReducerAndState(
 
       const token = line[cursor.token];
 
-      if (cursor.token === 0) {
+      // TODO: Handle labels
+      if (cursor.token === Token.Opcode) {
         // Opcode
         if (cursor.line > 0) {
           cursor.line -= 1;
-          cursor.token = 2;
+          cursor.token = Token.Operand2;
         }
         line[cursor.token] = undefined;
         return newState;

@@ -19,7 +19,7 @@ import {
   toggleWhoseCodeAction
 } from "../Action";
 import { addressingModeValue } from "../types";
-import { CursorPosition } from "../State";
+import { CursorPosition, Token } from "../State";
 import { Line } from "../Line";
 
 interface Props {
@@ -34,7 +34,7 @@ export class EditorView extends React.Component<Props, {}> {
     const { cursor, code, isOwnCode } = this.props;
 
     let keyboard;
-    if (cursor.token === 0 || cursor.token === undefined) {
+    if (cursor.token === Token.Opcode || cursor.token === undefined) {
       keyboard = (
         <OpcodeKeyboard
           onKeyPress={this.typeOpcode}
@@ -50,7 +50,7 @@ export class EditorView extends React.Component<Props, {}> {
           onNext={this.next}
           canAddAddressingMode={!cursor.isMidOperand}
           canNext={currentOperandIsValid(this.props)}
-          isEndOfLine={cursor.token === 2}
+          isEndOfLine={cursor.token === Token.Operand2}
         />
       );
     }

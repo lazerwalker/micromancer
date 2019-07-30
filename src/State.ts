@@ -1,5 +1,6 @@
 import { Line } from "./Line";
 import { Instruction, Warrior } from "corewars-js";
+import _ from "lodash";
 
 export interface State {
   code: Line[];
@@ -28,7 +29,7 @@ export enum UIMode {
 }
 
 export const initialState = (props?: Partial<State>): State => {
-  const code = [];
+  const code: Line[] = [];
   for (let i = 0; i < 10; i++) {
     code.push([]);
   }
@@ -47,14 +48,32 @@ export const initialState = (props?: Partial<State>): State => {
   };
 };
 
+export const ValidEmoji = ["🏁", "💜", "🔥", "🥑", "💩", "🐈"];
+
 export interface CursorPosition {
   line: number;
   token: number | undefined;
   isMidOperand: boolean;
 }
 
+export enum Token {
+  Label = 0,
+  Opcode,
+  Operand1,
+  Operand2
+}
+
 export function codeStringToCode(str: string): Line[] {
-  return [...str.split("\n").map(l => l.split(" ")), []];
+  return [
+    ...str.split("\n").map(l => {
+      let tokens: (string | undefined)[] = l.split(" ");
+      if (!_.includes(ValidEmoji, tokens[0])) {
+        tokens.unshift(undefined);
+      }
+      return tokens;
+    }),
+    []
+  ];
 }
 
 export function codeToString(code: Line[]): string {
