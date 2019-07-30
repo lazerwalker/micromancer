@@ -1,5 +1,6 @@
 import { Line } from "./Line";
 import { Instruction, Warrior } from "corewars-js";
+import { Level } from "./Level";
 import _ from "lodash";
 
 export interface State {
@@ -21,6 +22,8 @@ export interface State {
   /** If false, show the other code */
   editingCode: Line[];
   viewingOwnCode: boolean;
+
+  activeLevel?: Level;
 }
 
 export enum UIMode {

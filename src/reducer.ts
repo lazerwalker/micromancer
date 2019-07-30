@@ -12,6 +12,7 @@ import { Action, ActionType, debugRestartAction } from "./Action";
 import _ from "lodash";
 import { Reducer } from "react";
 import { Instruction, VM, parse } from "corewars-js";
+import { Levels } from "./Level";
 
 export type Dispatch = (action: Action<any>) => void;
 
@@ -56,7 +57,8 @@ export function createReducerAndState(
     memory: vm.memory,
     warriors: vm.warriors,
     debugStartPositions: vm.warriors.map(w => w.pc[0]),
-    nextPC: vm.warriors[0].pc[0]
+    nextPC: vm.warriors[0].pc[0],
+    activeLevel: Levels[0]
   });
 
   console.log(vm.equs);
@@ -272,6 +274,17 @@ export function createReducerAndState(
 
       newState.nextPC = result;
       console.log(vm.print());
+
+      if (newState.activeLevel) {
+        const won = newState.activeLevel.testWinCondition(
+          vm.memory,
+          vm.warriors
+        );
+        if (won) {
+          alert("WIN CONDITION MET");
+          newState.isPlaying = false;
+        }
+      }
 
       newState.debugTicks += 1;
       newState.memory = vm.memory;
