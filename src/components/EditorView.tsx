@@ -1,6 +1,7 @@
 import * as React from "react";
 import OpcodeKeyboard from "./OpcodeKeyboard";
 import NumberKeyboard from "./NumberKeyboard";
+import EmojiKeyboard from "./EmojiKeyboard";
 import _ from "lodash";
 import { currentOperandIsValid } from "../currentOperandIsValid";
 import CodeView from "./CodeView";
@@ -58,6 +59,8 @@ export class EditorView extends React.Component<Props, {}> {
 
     const valid = this.codeIsValid();
 
+    const emojiRow = <EmojiKeyboard onKeyPress={this.typeDigitOrMode} />;
+
     return (
       <div className="editor">
         <CodeView
@@ -78,6 +81,7 @@ export class EditorView extends React.Component<Props, {}> {
           {otherLabel}
         </button>
         <div id="logo">omega</div>
+        {isOwnCode ? emojiRow : undefined}
         {isOwnCode ? keyboard : undefined}
       </div>
     );

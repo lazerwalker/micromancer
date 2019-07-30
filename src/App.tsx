@@ -35,10 +35,10 @@ bomb DAT #0`;
 
 // const imp = "MOV 0, 1";
 
-const bomb = `ADD #4, 3
-MOV 2, @2
-JMP -2
-DAT #0, #0`;
+// const bomb = `ADD #4, 3
+// MOV 2, @2
+// JMP -2
+// DAT #0, #0`;
 
 // const program = `DAT 0
 // DAT 99
