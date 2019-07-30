@@ -108,7 +108,11 @@ export function createReducerAndState(
       if (!line) return state;
 
       if (cursor.token === Token.Label || cursor.token === Token.Opcode) {
-        line[Token.Label] = action.value;
+        if (line[Token.Label] === action.value) {
+          line[Token.Label] = undefined;
+        } else {
+          line[Token.Label] = action.value;
+        }
       } else {
         // TODO: This should probably be a discrete action
         if (action.value === "-" && !cursor.isMidOperand) {
