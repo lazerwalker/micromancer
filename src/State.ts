@@ -72,7 +72,7 @@ export function codeStringToCode(str: string): Line[] {
       }
       return tokens;
     }),
-    []
+    [undefined, undefined, undefined, undefined]
   ];
 }
 

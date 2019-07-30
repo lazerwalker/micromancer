@@ -42,7 +42,10 @@ export class EditorView extends React.Component<Props, {}> {
           onBackspace={this.didTypeBackspace}
         />
       );
-    } else {
+    } else if (
+      cursor.token === Token.Operand1 ||
+      cursor.token === Token.Operand2
+    ) {
       keyboard = (
         <NumberKeyboard
           onKeyPress={this.typeDigitOrMode}

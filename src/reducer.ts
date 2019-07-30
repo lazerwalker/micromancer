@@ -59,7 +59,7 @@ export function createReducerAndState(
     const line = code[cursor.line] || [];
 
     if (action.type === ActionType.TypeOpcode) {
-      if (cursor.token !== Token.Operand1 && cursor.token !== Token.Operand2) {
+      if (cursor.token !== Token.Opcode) {
         return state;
       }
 
@@ -69,7 +69,7 @@ export function createReducerAndState(
         line[Token.Opcode] = action.value;
       }
 
-      cursor.token = 1;
+      cursor.token += 1;
       cursor.isMidOperand = false;
 
       return newState;
@@ -129,11 +129,11 @@ export function createReducerAndState(
       if (cursor.token === undefined) {
         cursor.line = cursor.line + 1;
         if (!code[cursor.line]) {
-          code.push([]);
+          code.push([undefined, undefined, undefined, undefined]);
         }
 
         if (!code[cursor.line + 1]) {
-          code.push([]);
+          code.push([undefined, undefined, undefined, undefined]);
         }
         return newState;
       } else if (line[cursor.token]) {
@@ -146,11 +146,11 @@ export function createReducerAndState(
           cursor.line = cursor.line + 1;
 
           if (!code[cursor.line]) {
-            code.push([]);
+            code.push([undefined, undefined, undefined, undefined]);
           }
 
           if (!code[cursor.line + 1]) {
-            code.push([]);
+            code.push([undefined, undefined, undefined, undefined]);
           }
 
           return newState;
