@@ -49,6 +49,7 @@ export const initialState = (props?: Partial<State>): State => {
 };
 
 export const ValidEmoji = ["🏁", "💜", "🔥", "🥑", "💩", "🐈"];
+export const EmojiNames = ["start", "love", "flame", "avo", "poop", "cat"];
 
 export interface CursorPosition {
   line: number;

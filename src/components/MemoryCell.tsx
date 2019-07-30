@@ -6,6 +6,7 @@ import {
   printOperandA,
   printOperandB
 } from "corewars-js/dist/mars";
+import { ValidEmoji, EmojiNames } from "../State";
 
 interface Props {
   instruction: Instruction;
@@ -35,8 +36,15 @@ export function MemoryCell(props: Props) {
   }
 
   const text = strings.map(t => {
+    for (let i = 0; i < ValidEmoji.length; i++) {
+      t = t.replace(EmojiNames[i], ValidEmoji[i]);
+    }
+    return t;
+  });
+
+  const textEls = text.map(t => {
     return <div>{t}</div>;
   });
 
-  return <div className={classes}>{text}</div>;
+  return <div className={classes}>{textEls}</div>;
 }

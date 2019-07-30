@@ -140,9 +140,13 @@ export class EditorView extends React.Component<Props, {}> {
 
   // TODO: This might get more complicated, should probably be extracted somewhere
   codeIsValid = (): boolean => {
-    // Make sure there are no missing holes
-    const invalid = this.props.code.find(l => {
-      return (l.length > 0 && _.isUndefined(l[0])) || _.isUndefined(l[1]);
+    const nonEmptyLines = this.props.code.filter(l => {
+      const actualTokens = l.filter(t => t !== undefined);
+      return actualTokens.length > 0;
+    });
+
+    const invalid = nonEmptyLines.find(l => {
+      return (l.length > 0 && _.isUndefined(l[1])) || _.isUndefined(l[2]);
     });
     if (invalid) return false;
     return true;

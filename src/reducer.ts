@@ -4,7 +4,9 @@ import {
   codeStringToCode,
   UIMode,
   codeToString,
-  Token
+  Token,
+  ValidEmoji,
+  EmojiNames
 } from "./State";
 import { Action, ActionType, debugRestartAction } from "./Action";
 import _ from "lodash";
@@ -30,7 +32,14 @@ export function createReducerAndState(
     console.log(playerCode);
     console.log("---");
     console.log(enemyCode);
-    programs = [playerCode, enemyCode].map(parse);
+    programs = [playerCode, enemyCode]
+      .map(c => {
+        for (let i = 0; i < ValidEmoji.length; i++) {
+          c = c.replace(ValidEmoji[i], EmojiNames[i]);
+        }
+        return c;
+      })
+      .map(parse);
   };
 
   generatePrograms(rawCode);
