@@ -27,6 +27,7 @@ interface Props {
   code: Line[];
   dispatch: Dispatch;
   isOwnCode: boolean;
+  enemyCodeExists: boolean;
 }
 
 export class EditorView extends React.Component<Props, {}> {
@@ -58,7 +59,14 @@ export class EditorView extends React.Component<Props, {}> {
       );
     }
 
-    const otherLabel = isOwnCode ? "enemy code" : "my code";
+    let showOtherButton = undefined;
+    if (this.props.enemyCodeExists) {
+      showOtherButton = (
+        <button onClick={this.showOtherCode} id="show-other">
+          {isOwnCode ? "enemy code" : "my code"}
+        </button>
+      );
+    }
 
     const valid = this.codeIsValid();
 
@@ -80,9 +88,7 @@ export class EditorView extends React.Component<Props, {}> {
         >
           debug
         </button>
-        <button onClick={this.showOtherCode} id="show-other">
-          {otherLabel}
-        </button>
+        {showOtherButton}
         <div id="logo">omega</div>
         {isOwnCode ? emojiRow : undefined}
         {isOwnCode ? keyboard : undefined}

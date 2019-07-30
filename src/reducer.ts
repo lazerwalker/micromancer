@@ -13,6 +13,7 @@ import _ from "lodash";
 import { Reducer } from "react";
 import { Instruction, VM, parse } from "corewars-js";
 import { Levels } from "./Level";
+import { Line } from "./Line";
 
 export type Dispatch = (action: Action<any>) => void;
 
@@ -23,7 +24,7 @@ interface ReducerAndState {
 
 export function createReducerAndState(
   rawCode: string,
-  enemyCode: string,
+  enemyCode?: string,
   size: number = 80
 ): ReducerAndState {
   // TODO: Should this live in State instead of this closure?
@@ -33,7 +34,12 @@ export function createReducerAndState(
     console.log(playerCode);
     console.log("---");
     console.log(enemyCode);
-    programs = [playerCode, enemyCode]
+    let codes = [playerCode];
+    if (enemyCode !== undefined) {
+      codes.push(enemyCode);
+    }
+
+    programs = codes
       .map(c => {
         for (let i = 0; i < ValidEmoji.length; i++) {
           c = c.replace(ValidEmoji[i], EmojiNames[i]);
@@ -48,10 +54,15 @@ export function createReducerAndState(
   let vm = new VM(_.cloneDeep(programs), size);
 
   const code = codeStringToCode(rawCode);
-  const otherCode = codeStringToCode(enemyCode);
+
+  let otherCode: Line[] | undefined;
+  if (enemyCode !== undefined) {
+    otherCode = codeStringToCode(enemyCode);
+  }
 
   const s = initialState({
     code,
+    enemyCode: otherCode,
     editingCode: code,
     viewingOwnCode: true,
     memory: vm.memory,
@@ -341,7 +352,7 @@ export function createReducerAndState(
       newState.uiMode = UIMode.Editor;
       return newState;
     } else if (action.type === ActionType.ToggleWhoseCode) {
-      if (newState.viewingOwnCode) {
+      if (newState.viewingOwnCode && otherCode !== undefined) {
         newState.editingCode = otherCode;
       } else {
         newState.editingCode = newState.code;

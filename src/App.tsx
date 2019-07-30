@@ -62,7 +62,7 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-    const { state, reducer } = createReducerAndState("MOV 0, 1", vampire);
+    const { state, reducer } = createReducerAndState("MOV 0, 1", undefined);
     this.state = state;
     this.reducer = reducer;
   }
@@ -93,6 +93,7 @@ class App extends React.Component<{}, State> {
           code={this.state.editingCode}
           cursor={this.state.cursor}
           isOwnCode={this.state.viewingOwnCode}
+          enemyCodeExists={this.state.enemyCode !== undefined}
         />
       );
     } else if (this.state.uiMode === UIMode.Debug) {

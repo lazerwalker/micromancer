@@ -5,6 +5,8 @@ import _ from "lodash";
 
 export interface State {
   code: Line[];
+  enemyCode?: Line[];
+
   cursor: CursorPosition;
   memory: Instruction[];
 
