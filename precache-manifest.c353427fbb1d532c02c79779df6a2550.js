@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8095137341934658b4b84f8b9d6d02f3",
+    "revision": "5be7bd516570c7dc43fef1b1f1eb9840",
     "url": "/micromancer/index.html"
   },
   {
-    "revision": "ac1a37812c140b363c2b",
-    "url": "/micromancer/static/css/main.459b8c49.chunk.css"
+    "revision": "10af48cc184a0245c274",
+    "url": "/micromancer/static/css/main.acc377a6.chunk.css"
   },
   {
-    "revision": "4db414c6692f9f5b043c",
-    "url": "/micromancer/static/js/2.b6a2c784.chunk.js"
+    "revision": "4e96a9b2f57b5ec30e68",
+    "url": "/micromancer/static/js/2.5d7ca964.chunk.js"
   },
   {
-    "revision": "ac1a37812c140b363c2b",
-    "url": "/micromancer/static/js/main.17c07d54.chunk.js"
+    "revision": "10af48cc184a0245c274",
+    "url": "/micromancer/static/js/main.9a1b9ab3.chunk.js"
   },
   {
     "revision": "79ed29278c120aa231cf",

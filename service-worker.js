@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/micromancer/precache-manifest.9a914a93d0385ced17ccfadecfe7c734.js"
+  "/micromancer/precache-manifest.c353427fbb1d532c02c79779df6a2550.js"
 );
 
 self.addEventListener('message', (event) => {
