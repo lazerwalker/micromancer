@@ -42,7 +42,7 @@ export function createReducerAndState(
     programs = codes
       .map(c => {
         for (let i = 0; i < ValidEmoji.length; i++) {
-          c = c.replace(ValidEmoji[i], EmojiNames[i]);
+          c = c.replace(new RegExp(ValidEmoji[i], "g"), EmojiNames[i]);
         }
         return c;
       })
